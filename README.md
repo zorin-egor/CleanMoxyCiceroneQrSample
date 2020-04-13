@@ -6,8 +6,8 @@ A code is generated for the user that the controller can check.
 
 - Used in this sample:
     * MVP - [moxy](https://github.com/Arello-Mobile/Moxy)
-    * Injection - dagger2
-    * Navigation - cicerone
-    * QR-generator - zxing
-    * QR-reader - google play vision
-    * QR reader/generator screens has insets example
+    * Injection - [dagger](https://github.com/google/dagger)
+    * Navigation - [cicerone](https://github.com/terrakok/Cicerone)
+    * QR-generator - [zxing](https://github.com/zxing/zxing)
+    * QR-reader - [google vision](https://github.com/googlesamples/android-vision)
+    * QR reader/generator screens has insets [example](https://github.com/razir/MoviesInsetsDemo)

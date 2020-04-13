@@ -1,8 +1,5 @@
 import java.text.SimpleDateFormat
 
-/*
-* https://github.com/razir/MoviesInsetsDemo
-* */
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'

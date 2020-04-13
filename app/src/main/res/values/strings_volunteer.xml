@@ -1,0 +1,10 @@
+<resources>
+
+    <string name="volunteer_qr_reader_header">Volunteer App</string>
+    <string name="volunteer_qr_reader_scanner">Point the camera at QR code</string>
+    <string name="volunteer_qr_reader_success">Success!</string>
+    <string name="volunteer_qr_reader_activated">This QR code is already activated.</string>
+    <string name="volunteer_qr_reader_unknown">Unknown QR-code</string>
+    <string name="volunteer_qr_reader_exit">Logout</string>
+
+</resources>

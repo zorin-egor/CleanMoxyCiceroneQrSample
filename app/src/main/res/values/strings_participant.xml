@@ -1,0 +1,29 @@
+<resources>
+
+    <string name="participant_qr_code_image_title">Present a QR code at the input</string>
+    <string name="participant_qr_code_about_event">ABOUT EVENT</string>
+    <string name="participant_qr_code_about_movement">ABOUT INCREDIBLE MOVEMENT</string>
+    <string name="participant_about_to_qr">Show QR-CODE</string>
+    <string name="participant_festival_about_toolbar_title">Awesome event</string>
+    <string name="participant_festival_about_title">Incredible event</string>
+    <string name="participant_festival_about_content">
+        There are hundreds of festivals taking place every month all over the world.
+        They are often connected with celebrations of certain holidays, for example, New Year Day,
+        St. Patrick’s Day, Shrove Tuesday, Mother’s Day, May Day, Children’s Day, Halloween, etc.
+        There are also some festivals, which are not connected with common holidays,
+        but are cheerfully celebrated in certain countries. For example, Songkran – Thai New Year,
+        La Tomatina, Oktoberfest, Glastonbury Festival, Guy Fawkes Night, Notting Hill Carnival, Holi.
+    </string>
+
+    <string name="participant_movement_about_toolbar_title">Awesome movement</string>
+    <string name="participant_movement_about_title">Incredible event</string>
+    <string name="participant_movement_about_content">
+        There are hundreds of festivals taking place every month all over the world.
+        They are often connected with celebrations of certain holidays, for example, New Year Day,
+        St. Patrick’s Day, Shrove Tuesday, Mother’s Day, May Day, Children’s Day, Halloween, etc.
+        There are also some festivals, which are not connected with common holidays,
+        but are cheerfully celebrated in certain countries. For example, Songkran – Thai New Year,
+        La Tomatina, Oktoberfest, Glastonbury Festival, Guy Fawkes Night, Notting Hill Carnival, Holi.
+    </string>
+
+</resources>

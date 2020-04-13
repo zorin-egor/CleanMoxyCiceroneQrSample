@@ -1,0 +1,128 @@
+import java.text.SimpleDateFormat
+
+/*
+* https://github.com/razir/MoviesInsetsDemo
+* */
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+//apply plugin: 'io.fabric'
+
+def APP_ID = "com.sample.app"
+def APP_VERSION = '1.0'
+def APP_CODE = 1
+def FLAVOR_DIM = 'market'
+
+android {
+
+    compileSdkVersion SDK_MAX
+    buildToolsVersion BUILD_TOOL
+    flavorDimensions FLAVOR_DIM
+
+    signingConfigs {
+        signed {
+            keyAlias 'Kotlin'
+            keyPassword 'KotlinPWD'
+            storeFile file('../Kotlin.jks')
+            storePassword 'KotlinPWD'
+        }
+    }
+
+    defaultConfig {
+        applicationId APP_ID
+        minSdkVersion SDK_MIN
+        targetSdkVersion SDK_MAX
+        versionCode APP_CODE
+        versionName APP_VERSION
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    productFlavors {
+        dev {
+            dimension FLAVOR_DIM
+            applicationId "${APP_ID}.beta"
+            versionName "${APP_VERSION}b"
+        }
+
+        prod {
+            dimension FLAVOR_DIM
+            applicationId APP_ID
+            versionName APP_VERSION
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.signed
+        }
+
+        debug {
+            signingConfig signingConfigs.signed
+            minifyEnabled = false
+            debuggable true
+        }
+
+        applicationVariants.all { variant ->
+            variant.outputs.all {
+                buildConfigField 'Boolean', 'IS_TEST', 'false'
+                def buildType = variant.buildType.isDebuggable()? '_debug' : ''
+                def dateTime =  new SimpleDateFormat("_MMMMM.dd_HH-mm").format(new Date())
+                outputFileName = "Talents_${variant.versionName}${buildType}${dateTime}_build-${variant.versionCode}.apk"
+            }
+        }
+    }
+
+    preBuild.doLast {
+        delete fileTree(buildDir) {
+            include '**/*.apk'
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$KOTLIN"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$KOTLIN_COROUTINES"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$KOTLIN_COROUTINES"
+    implementation "com.crashlytics.sdk.android:crashlytics:$CRASHLYTICS"
+    implementation "com.google.android.gms:play-services-vision:$GOOGLE_VISION"
+    implementation "com.google.android.material:material:$XMATERIAL"
+
+    implementation "androidx.appcompat:appcompat:$XAPPCOMPAT"
+    implementation "androidx.recyclerview:recyclerview:$XRECYCLERVIEW"
+    implementation "androidx.cardview:cardview:$XCARDVIEW"
+    implementation "androidx.constraintlayout:constraintlayout:$XCONSTRAINT"
+    implementation "androidx.exifinterface:exifinterface:$EXIFINTERFACE"
+    implementation "androidx.core:core-ktx:$XCORE"
+
+    implementation "com.google.dagger:dagger:$DAGGER"
+    implementation "com.google.dagger:dagger-android:$DAGGER"
+    implementation "com.google.dagger:dagger-android-support:$DAGGER"
+    kapt "com.google.dagger:dagger-compiler:$DAGGER"
+    kapt "com.google.dagger:dagger-android-processor:$DAGGER"
+
+    implementation "com.arello-mobile:moxy:$MOXY"
+    implementation "com.arello-mobile:moxy-app-compat:$MOXY"
+    kapt "com.arello-mobile:moxy-compiler:$MOXY"
+
+    implementation "ru.terrakok.cicerone:cicerone:$CICERONE"
+
+    implementation "com.google.zxing:core:$ZXING_CORE"
+
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'androidx.test:core:1.1.0'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.0'
+    androidTestImplementation 'androidx.test:runner:1.1.1'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
+}
+
+
+kapt {
+    generateStubs = true
+}
+
+//apply plugin: 'com.google.gms.google-services'

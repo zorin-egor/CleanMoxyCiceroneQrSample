@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#000000</color>
+    <color name="colorPrimaryDark">#000000</color>
+    <color name="colorAccent">#000000</color>
+
+    <!-- Common -->
+    <color name="colorBlack">#000000</color>
+    <color name="colorWhite">#ffffff</color>
+    <color name="colorDark">#de000000</color>
+    <color name="colorLightGrey">#BDBDBD</color>
+    <color name="colorGrey">#5E5E5E</color>
+    <color name="colorDarkGreyTint">#b2000000</color>
+    <color name="colorGreyTint">#8a000000</color>
+    <color name="colorLightGreyTint">#61000000</color>
+    <color name="colorDarkLightTint">#1f000000</color>
+    <color name="colorLightTint">#8affffff</color>
+    <color name="colorLightWhiteTint">#33ffffff</color>
+    <color name="colorWhiteLightTint">#F5F5F5</color>
+    <color name="colorLightRedTint">#deff1744</color>
+    <color name="colorLightYellow">#E6FF00</color>
+
+    <!-- Ripple -->
+    <color name="colorGreyRipple">#1f000000</color>
+    <color name="colorYellowRipple">#5BE6FF00</color>
+
+</resources>

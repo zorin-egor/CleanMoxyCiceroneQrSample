@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    style="@style/CommonScrollView"
+    android:id="@+id/registrationWithContainer"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/registrationWithLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            style="@style/MediumTextView"
+            android:id="@+id/registrationWithHeaderBottom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/registration_event_title"
+            android:textStyle="bold"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            />
+
+        <include
+            layout="@layout/view_registration_with_frame"
+            android:id="@+id/registrationWithFrame"
+            android:layout_width="@dimen/views_width"
+            android:layout_height="@dimen/views_frame_height"
+            android:layout_marginTop="@dimen/default_large"
+            android:layout_marginStart="@dimen/default_xlarge"
+            android:layout_marginEnd="@dimen/default_xlarge"
+            app:layout_constraintTop_toBottomOf="@+id/registrationWithHeaderBottom"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            />
+
+        <androidx.appcompat.widget.AppCompatCheckBox
+            android:id="@+id/registrationWithAgreementCheck"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="@+id/registrationWithAgreementButton"
+            app:layout_constraintBottom_toBottomOf="@+id/registrationWithAgreementButton"
+            app:layout_constraintStart_toStartOf="@+id/registrationWithFrame"
+            app:layout_constraintEnd_toStartOf="@+id/registrationWithAgreementButton"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            />
+
+        <include
+            layout="@layout/view_button_image_round"
+            android:id="@+id/registrationWithAgreementButton"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/default_button_height"
+            android:layout_marginTop="@dimen/default_large"
+            android:layout_marginStart="@dimen/default_micro"
+            app:layout_constraintTop_toBottomOf="@+id/registrationWithFrame"
+            app:layout_constraintStart_toEndOf="@+id/registrationWithAgreementCheck"
+            app:layout_constraintEnd_toEndOf="@+id/registrationWithFrame"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            style="@style/MiniTextView"
+            android:id="@+id/registrationWithTitleButtons"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/registration_buttons"
+            android:textStyle="bold"
+            android:layout_marginTop="@dimen/default_large"
+            app:layout_constraintTop_toBottomOf="@+id/registrationWithAgreementButton"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            />
+
+        <include
+            android:id="@+id/registrationWithEmailButton"
+            layout="@layout/view_button_image_round"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/default_button_height"
+            android:layout_marginTop="@dimen/default_large"
+            app:layout_constraintTop_toBottomOf="@+id/registrationWithTitleButtons"
+            app:layout_constraintBottom_toTopOf="@+id/registrationWithVolunteerButton"
+            app:layout_constraintEnd_toEndOf="@+id/registrationWithFrame"
+            app:layout_constraintStart_toStartOf="@+id/registrationWithFrame"
+            app:layout_constraintVertical_bias="0.0"
+            />
+
+        <include
+            layout="@layout/view_button_image_round"
+            android:id="@+id/registrationWithVolunteerButton"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/button_height_mini"
+            android:layout_marginTop="@dimen/default_micro"
+            android:layout_marginBottom="@dimen/default_small"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/registrationWithFrame"
+            app:layout_constraintEnd_toEndOf="@+id/registrationWithFrame"
+            />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

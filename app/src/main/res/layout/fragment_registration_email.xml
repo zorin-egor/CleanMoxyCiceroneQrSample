@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/registrationEmailContainer"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ScrollView
+        style="@style/CommonScrollView"
+        android:id="@+id/registrationEmailScroll"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="@dimen/default_large"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/registrationEmailAgreementButton"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/registrationEmailLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.appcompat.widget.AppCompatEditText
+                style="@style/ContourRoundedEdit"
+                android:id="@+id/registrationNameEdit"
+                android:layout_width="@dimen/views_width"
+                android:layout_height="wrap_content"
+                android:hint="@string/registration_name"
+                android:inputType="text"
+                android:imeOptions="actionNext"
+                android:layout_marginTop="@dimen/default_large"
+                android:layout_marginStart="@dimen/default_xlarge"
+                android:layout_marginEnd="@dimen/default_xlarge"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                />
+
+            <androidx.appcompat.widget.AppCompatEditText
+                style="@style/ContourRoundedEdit"
+                android:id="@+id/registrationSurnameEdit"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:hint="@string/registration_surname"
+                android:inputType="text"
+                android:imeOptions="actionNext"
+                android:layout_marginTop="@dimen/default_large"
+                app:layout_constraintTop_toBottomOf="@+id/registrationNameEdit"
+                app:layout_constraintStart_toStartOf="@+id/registrationNameEdit"
+                app:layout_constraintEnd_toEndOf="@+id/registrationNameEdit"
+                />
+
+            <androidx.appcompat.widget.AppCompatEditText
+                style="@style/ContourRoundedEdit"
+                android:id="@+id/registrationEmailEdit"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:hint="@string/registration_mail"
+                android:inputType="textEmailAddress"
+                android:imeOptions="actionNext"
+                android:layout_marginTop="@dimen/default_large"
+                app:layout_constraintTop_toBottomOf="@+id/registrationSurnameEdit"
+                app:layout_constraintStart_toStartOf="@+id/registrationNameEdit"
+                app:layout_constraintEnd_toEndOf="@+id/registrationNameEdit"
+                />
+
+            <androidx.appcompat.widget.AppCompatEditText
+                style="@style/ContourRoundedEdit"
+                android:id="@+id/registrationCaptchaEdit"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:hint="@string/registration_captcha"
+                android:inputType="text"
+                android:imeOptions="actionDone"
+                android:layout_marginTop="@dimen/default_large"
+                app:layout_constraintTop_toBottomOf="@+id/registrationEmailEdit"
+                app:layout_constraintStart_toStartOf="@+id/registrationNameEdit"
+                app:layout_constraintEnd_toStartOf="@+id/registrationCaptchaImage"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                style="@style/RippleImageView"
+                android:id="@+id/registrationCaptchaImage"
+                android:layout_width="@dimen/captcha_width"
+                android:layout_height="0dp"
+                android:scaleType="fitXY"
+                android:layout_marginStart="@dimen/default_medium"
+                app:layout_constraintBottom_toBottomOf="@+id/registrationCaptchaEdit"
+                app:layout_constraintEnd_toEndOf="@+id/registrationNameEdit"
+                app:layout_constraintStart_toEndOf="@+id/registrationCaptchaEdit"
+                app:layout_constraintTop_toTopOf="@+id/registrationCaptchaEdit"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                />
+
+            <ProgressBar
+                style="?android:attr/progressBarStyleSmall"
+                android:id="@+id/registrationCaptchaProgress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:indeterminate="true"
+                android:visibility="gone"
+                app:layout_constraintTop_toTopOf="@+id/registrationCaptchaImage"
+                app:layout_constraintStart_toStartOf="@+id/registrationCaptchaImage"
+                app:layout_constraintEnd_toEndOf="@+id/registrationCaptchaImage"
+                app:layout_constraintBottom_toBottomOf="@+id/registrationCaptchaImage"
+                />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+    <include
+        layout="@layout/view_button_image_round"
+        android:id="@+id/registrationEmailAgreementButton"
+        android:layout_width="@dimen/views_width"
+        android:layout_height="@dimen/default_button_height"
+        android:layout_marginBottom="@dimen/default_large"
+        android:layout_marginStart="@dimen/default_xlarge"
+        android:layout_marginEnd="@dimen/default_xlarge"
+        app:layout_constraintBottom_toTopOf="@+id/registrationEmailRegButton"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        />
+
+    <include
+        layout="@layout/view_button_image_round"
+        android:id="@+id/registrationEmailRegButton"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/default_button_height"
+        android:hint="@string/registration_name"
+        android:layout_marginBottom="@dimen/default_large"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/registrationEmailAgreementButton"
+        app:layout_constraintEnd_toEndOf="@+id/registrationEmailAgreementButton"
+        />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+

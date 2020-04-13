@@ -1,0 +1,17 @@
+<resources>
+
+    <string name="app_name">QR-controller sample</string>
+    <string name="app_chooser">Choose app for open...</string>
+
+    <string name="text_ok">OK</string>
+    <string name="text_cancel">CANCEL</string>
+
+    <string name="error_unknown">Unknown error</string>
+    <string name="error_auth">Authorisation Error</string>
+    <string name="error_network">Check network connectivity</string>
+    <string name="error_retry">Try again</string>
+
+    <string name="url_qr">https://github.com/zorin-egor</string>
+    <string name="url_license">https://help.github.com/en/github/creating-cloning-and-archiving-repositories/licensing-a-repository</string>
+
+</resources>

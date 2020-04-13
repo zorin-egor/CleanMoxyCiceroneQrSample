@@ -1,0 +1,46 @@
+<resources>
+
+    <string name="errors_input">Fill required fields</string>
+
+    <string name="registration_title">Register</string>
+    <string name="registration_event_title">on event</string>
+    <string name="registration_frame_title">Awesome event</string>
+    <string name="registration_frame_date">01.01.1970 - Now days</string>
+    <string name="registration_buttons">Register with</string>
+    <string name="registration_email">E-mail</string>
+
+    <string name="registration_volunteer_button">
+        <![CDATA[
+            <u>Sign in for volunteer</u>
+        ]]>
+    </string>
+
+    <string name="registration_agreement_button">
+        <![CDATA[
+            By registering, I accept the <u> terms of user agreement </u> and <u> the rules for the protection of personal data. </u>
+        ]]>
+    </string>
+
+    <string name="registration_name">Name</string>
+    <string name="registration_surname">Surname</string>
+    <string name="registration_mail">Mail</string>
+    <string name="registration_login">Login</string>
+    <string name="registration_birthday">Birthday</string>
+    <string name="registration_password">Password</string>
+    <string name="registration_captcha">Captcha</string>
+    <string name="registration_sign_in">Sign in</string>
+    <string name="registration_to_register">Register</string>
+    <string name="registration_volunteer_title">Sign in for volunteer</string>
+
+    <string name="registration_about_toolbar_title">Agreement</string>
+    <string name="registration_about_content_title">Title</string>
+    <string name="registration_about_content_text">
+        There are hundreds of festivals taking place every month all over the world.
+        They are often connected with celebrations of certain holidays, for example, New Year Day,
+        St. Patrick’s Day, Shrove Tuesday, Mother’s Day, May Day, Children’s Day, Halloween, etc.
+        There are also some festivals, which are not connected with common holidays,
+        but are cheerfully celebrated in certain countries. For example, Songkran – Thai New Year,
+        La Tomatina, Oktoberfest, Glastonbury Festival, Guy Fawkes Night, Notting Hill Carnival, Holi.
+    </string>
+
+</resources>

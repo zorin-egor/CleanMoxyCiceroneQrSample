@@ -82,9 +82,10 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$KOTLIN"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$KOTLIN"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$KOTLIN_COROUTINES"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$KOTLIN_COROUTINES"
+
     implementation "com.crashlytics.sdk.android:crashlytics:$CRASHLYTICS"
     implementation "com.google.android.gms:play-services-vision:$GOOGLE_VISION"
     implementation "com.google.android.material:material:$XMATERIAL"

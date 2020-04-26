@@ -26,7 +26,7 @@ class Coroutine(backgroundContext: CoroutineContext = Dispatchers.Default) {
                     onBackground.invoke(this@launch, this@Coroutine)
                 }
                 onComplete?.invoke(result)
-            } catch (e: Exception) {
+            } catch (e: Throwable) {
                 if (e !is CancellationException) {
                     onError?.invoke(e)
                 }

@@ -15,7 +15,7 @@ class Coroutine(backgroundContext: CoroutineContext = Dispatchers.Default) {
 
     suspend fun <T> async(context: CoroutineContext = mBackgroundContext, block: suspend () -> T): Deferred<T> {
         return mScope.async(context) {
-            block.invoke()
+            block()
         }
     }
 

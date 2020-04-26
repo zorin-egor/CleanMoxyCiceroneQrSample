@@ -23,7 +23,7 @@ class Coroutine(backgroundContext: CoroutineContext = Dispatchers.Default) {
         return mScope.launch(mForegroundContext) {
             try {
                 val result = withContext(mBackgroundContext) {
-                    onBackground.invoke(this@launch, this@Coroutine)
+                    onBackground(this@launch, this@Coroutine)
                 }
                 onComplete?.invoke(result)
             } catch (e: Throwable) {

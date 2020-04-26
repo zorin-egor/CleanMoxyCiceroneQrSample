@@ -31,7 +31,7 @@ abstract class BaseActivity : MvpAppCompatActivity(), FragmentManager.OnBackStac
     protected lateinit var mNavigatorHolder: NavigatorHolder
     protected open val mNavigator: Navigator
 
-    protected lateinit var mSnackBar: Snackbar
+    protected var mSnackBar: Snackbar? = null
 
     init {
         mNavigator = SupportAppNavigator(this, -1)
@@ -98,11 +98,11 @@ abstract class BaseActivity : MvpAppCompatActivity(), FragmentManager.OnBackStac
     }
 
     protected fun showSnackBar(string: String): Snackbar {
-        return mSnackBar.apply {
+        return mSnackBar?.apply {
             setText(string)
             setAction(null, null)
             show()
-        }
+        } ?: throw IllegalStateException("Snackbar must be set")
     }
 
     protected fun setStatusBarColor(@ColorRes color: Int) {

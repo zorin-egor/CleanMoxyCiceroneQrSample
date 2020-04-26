@@ -117,7 +117,7 @@ abstract class BaseFragment : MvpAppCompatFragment(), BaseActivity.OnBackPressFr
             setText(string)
             setAction(null, null)
             show()
-        } ?: throw IllegalStateException("SnackBar must be set")
+        } ?: throw IllegalStateException("Snackbar must be set")
     }
 
     protected fun checkCameraPermission(requestCode: Int = PERMISSION_CAMERA): Boolean {

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.sample.app">
+    package="com.sample.qr">
 
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
@@ -11,7 +11,7 @@
         android:required="true"/>
 
     <application
-        android:name=".App"
+        android:name="com.sample.qr.App"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -21,7 +21,7 @@
         android:usesCleartextTraffic="true">
 
         <activity
-            android:name=".ui.activities.login.SplashActivity"
+            android:name="com.sample.qr.ui.activities.login.SplashActivity"
             android:screenOrientation="portrait"
             android:theme="@style/SplashActivity"
             >
@@ -32,7 +32,7 @@
         </activity>
 
         <activity
-            android:name=".ui.activities.login.RegistrationActivity"
+            android:name="com.sample.qr.ui.activities.login.RegistrationActivity"
             android:theme="@style/RegistrationActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize"
@@ -44,7 +44,7 @@
         </activity>
 
         <activity
-            android:name=".ui.activities.main.ParticipantActivity"
+            android:name="com.sample.qr.ui.activities.main.ParticipantActivity"
             android:theme="@style/ParticipantsActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize"
@@ -56,7 +56,7 @@
         </activity>
 
         <activity
-            android:name=".ui.activities.main.VolunteerActivity"
+            android:name="com.sample.qr.ui.activities.main.VolunteerActivity"
             android:theme="@style/VolunteerActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize"

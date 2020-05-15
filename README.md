@@ -11,3 +11,10 @@ A code is generated for the user that the controller can check.
     * QR-generator - [zxing](https://github.com/zxing/zxing)
     * QR-reader - [google vision](https://github.com/googlesamples/android-vision)
     * QR reader/generator screens has insets [example](https://github.com/razir/MoviesInsetsDemo)
+    
+## Screenshots
+<p align="center">
+  <a>
+    <img alt="MvpCiceroneQr" src="https://user-images.githubusercontent.com/13707343/82045053-17298500-96b7-11ea-9c0c-4edde1ee8c05.gif" />
+  </a>
+</p>

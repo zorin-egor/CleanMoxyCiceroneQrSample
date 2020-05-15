@@ -15,6 +15,6 @@ A code is generated for the user that the controller can check.
 ## Screenshots
 <p align="center">
   <a>
-    <img alt="MvpCiceroneQr" src="https://user-images.githubusercontent.com/13707343/82045053-17298500-96b7-11ea-9c0c-4edde1ee8c05.gif" />
+    <img alt="MvpCiceroneQr" src="https://user-images.githubusercontent.com/13707343/82046645-f282dc80-96b9-11ea-9093-ff26e54fd25b.gif" />
   </a>
 </p>

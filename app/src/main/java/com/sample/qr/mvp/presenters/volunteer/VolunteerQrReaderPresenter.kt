@@ -46,6 +46,7 @@ class VolunteerQrReaderPresenter : BasePresenter<VolunteerQrReaderView>() {
     private val mHandler = Handler(Looper.getMainLooper())
     private var mQrJob: Job? = null
     private var mRandomError: Boolean = false
+    private var mState = 0
 
     init {
         App.instance.getAppComponent().inject(this)
@@ -64,8 +65,22 @@ class VolunteerQrReaderPresenter : BasePresenter<VolunteerQrReaderView>() {
                 delay(1000)
 
                 if (mRandomError || Random.nextBoolean()) {
-                    when (Random.nextInt() % 3) {
+                    when (mState++) {
                         0 -> {
+                            foreground.launch {
+                                viewState.onUnknownState()
+                            }
+                        }
+
+                        1 -> {
+                            foreground.launch {
+                                viewState.onActivatedState()
+                            }
+                        }
+
+                        else -> {
+                            mState = 0
+
                             foreground.launch {
                                 viewState.onSuccessState()
                             }
@@ -77,18 +92,6 @@ class VolunteerQrReaderPresenter : BasePresenter<VolunteerQrReaderView>() {
                             }, getString(R.string.app_chooser)).apply {
                                 addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
                             })
-                        }
-
-                        1 -> {
-                            foreground.launch {
-                                viewState.onActivatedState()
-                            }
-                        }
-
-                        else -> {
-                            foreground.launch {
-                                viewState.onUnknownState()
-                            }
                         }
                     }
                 } else {

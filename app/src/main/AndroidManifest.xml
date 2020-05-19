@@ -23,8 +23,7 @@
         <activity
             android:name="com.sample.qr.ui.activities.login.SplashActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/SplashActivity"
-            >
+            android:theme="@style/SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -34,9 +33,7 @@
         <activity
             android:name="com.sample.qr.ui.activities.login.RegistrationActivity"
             android:theme="@style/RegistrationActivity"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustResize"
-            >
+            android:windowSoftInputMode="adjustResize">
 <!--            <intent-filter>-->
 <!--                <action android:name="android.intent.action.MAIN" />-->
 <!--                <category android:name="android.intent.category.LAUNCHER" />-->
@@ -46,9 +43,7 @@
         <activity
             android:name="com.sample.qr.ui.activities.main.ParticipantActivity"
             android:theme="@style/ParticipantsActivity"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustResize"
-            >
+            android:windowSoftInputMode="adjustResize">
 <!--            <intent-filter>-->
 <!--                <action android:name="android.intent.action.MAIN" />-->
 <!--                <category android:name="android.intent.category.LAUNCHER" />-->
@@ -58,9 +53,7 @@
         <activity
             android:name="com.sample.qr.ui.activities.main.VolunteerActivity"
             android:theme="@style/VolunteerActivity"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustResize"
-            >
+            android:windowSoftInputMode="adjustResize">
 <!--            <intent-filter>-->
 <!--                <action android:name="android.intent.action.MAIN" />-->
 <!--                <category android:name="android.intent.category.LAUNCHER" />-->

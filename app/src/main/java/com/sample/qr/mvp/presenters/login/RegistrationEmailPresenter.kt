@@ -5,7 +5,7 @@ import com.arellomobile.mvp.InjectViewState
 import com.sample.qr.App
 import com.sample.qr.R
 import com.sample.qr.managers.exceptions.AuthException
-import com.sample.qr.managers.extensions.text
+import com.sample.qr.managers.extensions.toBitmap
 import com.sample.qr.mvp.presenters.base.BasePresenter
 import com.sample.qr.mvp.screens.ActivitiesScreen
 import com.sample.qr.mvp.views.login.RegistrationEmailView
@@ -117,7 +117,7 @@ class RegistrationEmailPresenter : BasePresenter<RegistrationEmailView>() {
 
             delay(1000)
             mCaptcha = UUID.randomUUID().toString().substring(0, 5)
-            val bitmap = mCaptcha.text(40.0f, 0xFF000000.toInt())
+            val bitmap = mCaptcha.toBitmap(40.0f, 0xFF000000.toInt())
 
             foreground.launch {
                 viewState.onCaptchaBitmap(bitmap)

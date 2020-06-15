@@ -22,8 +22,8 @@ fun Context.getColorStates(@ColorRes colorId: Int) = ColorStateList.valueOf(Cont
 
 fun Fragment.getColorStates(@ColorRes colorId: Int) = requireContext().getColorStates(colorId)
 
-fun Context.getHtmlSpanned(@StringRes stringRes: Int): Spanned {
-    return getString(stringRes).getHtmlSpanned()
+fun Context.toSpanned(@StringRes stringRes: Int): Spanned {
+    return getString(stringRes).toSpanned()
 }
 
 fun Activity.setNavigationBarColor(color: Int) {

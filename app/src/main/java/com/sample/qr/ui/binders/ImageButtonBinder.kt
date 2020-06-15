@@ -19,7 +19,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import com.sample.qr.R
 import com.sample.qr.managers.extensions.getColorStates
-import com.sample.qr.managers.extensions.getHtmlSpanned
+import com.sample.qr.managers.extensions.toSpanned
 import kotlinx.android.synthetic.main.view_button_image_round.view.*
 
 class ImageButtonBinder(private val view: View) {
@@ -103,7 +103,7 @@ class ImageButtonBinder(private val view: View) {
     }
 
     fun setTitle(@StringRes value: Int) {
-        title.text = view.context.getString(value).getHtmlSpanned()
+        title.text = view.context.getString(value).toSpanned()
     }
 
     fun setTitleSize(@DimenRes value: Int) {

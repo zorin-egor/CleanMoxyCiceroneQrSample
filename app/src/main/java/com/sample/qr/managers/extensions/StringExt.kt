@@ -9,7 +9,7 @@ import android.text.Html
 import android.text.Spanned
 
 
-fun String.getHtmlSpanned(): Spanned {
+fun String.toSpanned(): Spanned {
     return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
         Html.fromHtml(this, Html.FROM_HTML_MODE_LEGACY)
     } else {
@@ -17,7 +17,7 @@ fun String.getHtmlSpanned(): Spanned {
     }
 }
 
-fun String.text(textSize: Float, textColor: Int): Bitmap {
+fun String.toBitmap(textSize: Float, textColor: Int): Bitmap {
     val paint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
         this.textSize = textSize
         this.color = textColor
@@ -30,7 +30,7 @@ fun String.text(textSize: Float, textColor: Int): Bitmap {
     val image = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888)
 
     val canvas = Canvas(image).apply {
-        drawText(this@text, 0.0f, baseline, paint)
+        drawText(this@toBitmap, 0.0f, baseline, paint)
     }
 
     return image

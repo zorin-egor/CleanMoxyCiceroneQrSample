@@ -8,9 +8,8 @@ import android.view.View
 import com.google.android.material.snackbar.Snackbar
 import com.sample.qr.App
 import com.sample.qr.R
+import com.sample.qr.managers.extensions.getSnackBar
 import com.sample.qr.managers.tools.PreferenceTool
-import com.sample.qr.managers.utils.PermissionUtils
-import com.sample.qr.managers.utils.UiUtils
 import com.sample.qr.mvp.migrate.MvpAppCompatFragment
 import com.sample.qr.ui.activities.base.BaseActivity
 import ru.terrakok.cicerone.Router
@@ -109,7 +108,7 @@ abstract class BaseFragment : MvpAppCompatFragment(), BaseActivity.OnBackPressFr
     }
 
     private fun init(view: View, savedInstanceState: Bundle?) {
-        mSnackBar = UiUtils.getSnackBar(view, R.color.colorDark)
+        mSnackBar = view.getSnackBar(R.color.colorDark)
     }
 
     protected fun showSnackBar(string: String): Snackbar {
@@ -118,22 +117,6 @@ abstract class BaseFragment : MvpAppCompatFragment(), BaseActivity.OnBackPressFr
             setAction(null, null)
             show()
         } ?: throw IllegalStateException("Snackbar must be set")
-    }
-
-    protected fun checkCameraPermission(requestCode: Int = PERMISSION_CAMERA): Boolean {
-        return PermissionUtils.checkCameraPermission(this, requestCode)
-    }
-
-    protected fun setStatusBarLight(isLight: Boolean) {
-        UiUtils.setStatusBarLight(mBaseActivity, isLight)
-    }
-
-    protected fun setFullscreen(isFullscreen: Boolean) {
-        UiUtils.setFullscreen(mBaseActivity, isFullscreen)
-    }
-
-    protected fun setNoLimits(isNoLimits: Boolean) {
-        UiUtils.setNoLimits(mBaseActivity, isNoLimits)
     }
 
 }

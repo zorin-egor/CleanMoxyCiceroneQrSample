@@ -15,7 +15,8 @@ import com.google.android.gms.vision.Tracker
 import com.google.android.gms.vision.barcode.Barcode
 import com.google.android.gms.vision.barcode.BarcodeDetector
 import com.sample.qr.R
-import com.sample.qr.managers.utils.UiUtils
+import com.sample.qr.managers.extensions.getColorStates
+import com.sample.qr.managers.extensions.requestCameraPermission
 import com.sample.qr.mvp.presenters.volunteer.VolunteerQrReaderPresenter
 import com.sample.qr.mvp.views.volunteer.VolunteerQrReaderView
 import com.sample.qr.ui.binders.ImageButtonBinder
@@ -117,25 +118,25 @@ class VolunteerQrReaderFragment : BaseFragment(),
 
     override fun onScannerState() {
         volunteerQrReaderFrameTitle.setText(R.string.volunteer_qr_reader_scanner)
-        volunteerQrReaderFrameTitle.setTextColor(UiUtils.getColorStateList(requireContext(), R.color.colorLightGreyTint))
+        volunteerQrReaderFrameTitle.setTextColor(getColorStates(R.color.colorLightGreyTint))
     }
 
     override fun onSuccessState() {
         mOverlayDrawable.overlayColor = Color.argb(CameraFrameDrawable.BACKGROUND_ALPHA, 0, 255, 0)
         volunteerQrReaderFrameTitle.setText(R.string.volunteer_qr_reader_success)
-        volunteerQrReaderFrameTitle.setTextColor(UiUtils.getColorStateList(requireContext(), R.color.colorWhite))
+        volunteerQrReaderFrameTitle.setTextColor(getColorStates(R.color.colorWhite))
     }
 
     override fun onUnknownState() {
         mOverlayDrawable.overlayColor = Color.argb(CameraFrameDrawable.BACKGROUND_ALPHA, 255, 0, 0)
         volunteerQrReaderFrameTitle.setText(R.string.volunteer_qr_reader_unknown)
-        volunteerQrReaderFrameTitle.setTextColor(UiUtils.getColorStateList(requireContext(), R.color.colorWhite))
+        volunteerQrReaderFrameTitle.setTextColor(getColorStates(R.color.colorWhite))
     }
 
     override fun onActivatedState() {
         mOverlayDrawable.overlayColor = Color.argb(CameraFrameDrawable.BACKGROUND_ALPHA, 0, 0, 255)
         volunteerQrReaderFrameTitle.setText(R.string.volunteer_qr_reader_activated)
-        volunteerQrReaderFrameTitle.setTextColor(UiUtils.getColorStateList(requireContext(), R.color.colorWhite))
+        volunteerQrReaderFrameTitle.setTextColor(getColorStates(R.color.colorWhite))
     }
 
 
@@ -153,8 +154,8 @@ class VolunteerQrReaderFragment : BaseFragment(),
             insets
         }
 
-        volunteerQrReaderHeader.setTextColor(UiUtils.getColorStateList(requireContext(), R.color.colorGreyTint))
-        volunteerQrReaderFrameTitle.setTextColor(UiUtils.getColorStateList(requireContext(), R.color.colorGreyTint))
+        volunteerQrReaderHeader.setTextColor(getColorStates(R.color.colorGreyTint))
+        volunteerQrReaderFrameTitle.setTextColor(getColorStates(R.color.colorGreyTint))
 
         mExitButtonBinder = ImageButtonBinder(volunteerQrReaderLogout).apply {
             setOnClickListener(this@VolunteerQrReaderFragment)
@@ -175,7 +176,7 @@ class VolunteerQrReaderFragment : BaseFragment(),
     }
 
     private fun initCameraSource() {
-        if (checkCameraPermission()) {
+        if (requestCameraPermission(PERMISSION_CAMERA)) {
             createCameraSource()
         }
     }

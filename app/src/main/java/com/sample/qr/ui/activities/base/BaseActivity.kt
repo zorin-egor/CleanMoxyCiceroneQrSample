@@ -2,14 +2,13 @@ package com.sample.qr.ui.activities.base
 
 import android.os.Bundle
 import android.view.View
-import androidx.annotation.ColorRes
 import androidx.annotation.StringRes
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import com.google.android.material.snackbar.Snackbar
 import com.sample.qr.App
 import com.sample.qr.R
-import com.sample.qr.managers.utils.UiUtils
+import com.sample.qr.managers.extensions.getSnackBar
 import com.sample.qr.mvp.migrate.MvpAppCompatActivity
 import ru.terrakok.cicerone.Navigator
 import ru.terrakok.cicerone.NavigatorHolder
@@ -90,7 +89,7 @@ abstract class BaseActivity : MvpAppCompatActivity(), FragmentManager.OnBackStac
 
     private fun init(savedInstanceState: Bundle?) {
         supportFragmentManager.addOnBackStackChangedListener(this)
-        mSnackBar = UiUtils.getSnackBar(findViewById<View>(android.R.id.content), R.color.colorDarkGreyTint)
+        mSnackBar = findViewById<View>(android.R.id.content).getSnackBar(R.color.colorDarkGreyTint)
     }
 
     protected fun showSnackBar(@StringRes resource: Int): Snackbar {
@@ -103,22 +102,6 @@ abstract class BaseActivity : MvpAppCompatActivity(), FragmentManager.OnBackStac
             setAction(null, null)
             show()
         } ?: throw IllegalStateException("Snackbar must be set")
-    }
-
-    protected fun setStatusBarColor(@ColorRes color: Int) {
-        UiUtils.setStatusBarColor(this, color)
-    }
-
-    protected fun setStatusBarLight(isLight: Boolean) {
-        UiUtils.setStatusBarLight(this, isLight)
-    }
-
-    protected fun setFullscreen(isFullscreen: Boolean) {
-        UiUtils.setFullscreen(this, isFullscreen)
-    }
-
-    protected fun setNoLimits(isNoLimits: Boolean) {
-        UiUtils.setNoLimits(this, isNoLimits)
     }
 
 }

@@ -4,6 +4,8 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import com.sample.qr.R
+import com.sample.qr.managers.extensions.setStatusBarColorRes
+import com.sample.qr.managers.extensions.setStatusBarLight
 import com.sample.qr.mvp.screens.FragmentsScreen
 import com.sample.qr.ui.activities.base.BaseActivity
 import com.sample.qr.ui.binders.ToolbarTextBinder
@@ -25,7 +27,7 @@ class RegistrationActivity : BaseActivity(), View.OnClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_registration)
-        setStatusBarColor(R.color.colorWhite)
+        setStatusBarColorRes(R.color.colorWhite)
         setStatusBarLight(false)
 
         toolbarBinder.apply {

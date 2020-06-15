@@ -13,7 +13,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.sample.qr.R
-import com.sample.qr.managers.utils.UiUtils
+import com.sample.qr.managers.extensions.getColorStates
 import com.sample.qr.mvp.presenters.login.RegistrationEmailPresenter
 import com.sample.qr.mvp.screens.FragmentsScreen
 import com.sample.qr.mvp.views.login.RegistrationEmailView
@@ -173,11 +173,11 @@ class RegistrationEmailFragment : BaseFragment(),
     }
 
     private fun getErrorColorState(): ColorStateList {
-        return UiUtils.getColorStateList(requireContext(), R.color.colorLightRedTint)
+        return getColorStates(R.color.colorLightRedTint)
     }
 
     private fun getNormalColorState(): ColorStateList {
-        return UiUtils.getColorStateList(requireContext(), R.color.colorDarkLightTint)
+        return getColorStates(R.color.colorDarkLightTint)
     }
 
 }

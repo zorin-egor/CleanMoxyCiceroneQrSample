@@ -46,7 +46,12 @@ class VolunteerLoginPresenter : BasePresenter<VolunteerLoginView>() {
         }
 
         mRegistrationJob?.cancel()
-        mRegistrationJob = mRoutinesIO.run({ foreground, instance ->
+        mRegistrationJob = mRoutinesIO.run({
+            handlerError(it)
+            viewState.onButtonEnabled(true)
+        }, {
+            viewState.onButtonEnabled(true)
+        }) { foreground ->
             foreground.launch {
                 viewState.onButtonEnabled(false)
             }
@@ -61,13 +66,7 @@ class VolunteerLoginPresenter : BasePresenter<VolunteerLoginView>() {
                 mRandomError = true
                 throw UnknownServiceException()
             }
-
-        }, {
-            viewState.onButtonEnabled(true)
-        }, {
-            handlerError(it)
-            viewState.onButtonEnabled(true)
-        })
+        }
     }
 
 }

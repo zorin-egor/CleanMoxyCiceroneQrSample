@@ -1,6 +1,6 @@
 package com.sample.qr.ui.binders
 
-import android.content.res.ColorStateList
+
 import android.graphics.PorterDuff
 import android.graphics.Typeface
 import android.graphics.drawable.RippleDrawable
@@ -18,7 +18,8 @@ import androidx.appcompat.widget.AppCompatTextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import com.sample.qr.R
-import com.sample.qr.managers.utils.UiUtils
+import com.sample.qr.managers.extensions.getColorStates
+import com.sample.qr.managers.extensions.getHtmlSpanned
 import kotlinx.android.synthetic.main.view_button_image_round.view.*
 
 class ImageButtonBinder(private val view: View) {
@@ -80,7 +81,7 @@ class ImageButtonBinder(private val view: View) {
     }
 
     fun setBackgroundColorTint(@ColorRes value: Int) {
-        layout.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(view.context, value))
+        layout.backgroundTintList = view.context.getColorStates(value)
     }
 
     fun setBackgroundDrawable(@DrawableRes value: Int) {
@@ -89,7 +90,7 @@ class ImageButtonBinder(private val view: View) {
 
     fun setRippleColor(@ColorRes value: Int) {
         if (layout.background is RippleDrawable) {
-            (layout.background as RippleDrawable).setColor(UiUtils.getColorStateList(view.context, value))
+            (layout.background as RippleDrawable).setColor(view.context.getColorStates(value))
         }
     }
 
@@ -102,7 +103,7 @@ class ImageButtonBinder(private val view: View) {
     }
 
     fun setTitle(@StringRes value: Int) {
-        title.text = UiUtils.getHtmlSpanned(view.context, value)
+        title.text = view.context.getString(value).getHtmlSpanned()
     }
 
     fun setTitleSize(@DimenRes value: Int) {
@@ -140,7 +141,7 @@ class ImageButtonBinder(private val view: View) {
     }
 
     fun setIconTint(@ColorRes value: Int) {
-        icon.imageTintList = ColorStateList.valueOf(ContextCompat.getColor(view.context, value))
+        icon.imageTintList = view.context.getColorStates(value)
     }
 
     fun setIconVisibility(value: Boolean) {

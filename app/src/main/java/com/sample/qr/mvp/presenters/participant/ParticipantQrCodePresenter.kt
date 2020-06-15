@@ -33,7 +33,12 @@ class ParticipantQrCodePresenter : BasePresenter<ParticipantQrCodeView>() {
 
     fun qr() {
         mQrJob?.cancel()
-        mQrJob = mRoutinesIO.run({ foreground, instance ->
+        mQrJob = mRoutinesIO.run({
+            handlerError(it)
+            viewState.onProgressVisibility(false)
+        }, {
+            viewState.onProgressVisibility(false)
+        }) { foreground ->
             foreground.launch {
                 viewState.onProgressVisibility(true)
             }
@@ -49,13 +54,7 @@ class ParticipantQrCodePresenter : BasePresenter<ParticipantQrCodeView>() {
             foreground.launch {
                 viewState.onQrCodeReady(bitmap)
             }
-
-        }, {
-            viewState.onProgressVisibility(false)
-        }, {
-            handlerError(it)
-            viewState.onProgressVisibility(false)
-        })
+        }
     }
 
 }

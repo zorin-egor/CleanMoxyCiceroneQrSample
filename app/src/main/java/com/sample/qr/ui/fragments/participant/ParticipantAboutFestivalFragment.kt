@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.view.View
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.sample.qr.R
-import com.sample.qr.managers.utils.UiUtils
+import com.sample.qr.managers.extensions.getColorStates
 import com.sample.qr.mvp.models.BaseAboutItem
 import com.sample.qr.mvp.presenters.participant.ParticipantAboutFestivalPresenter
 import com.sample.qr.mvp.views.participant.ParticipantAboutFestivalView
@@ -38,7 +38,7 @@ class ParticipantAboutFestivalFragment : AboutListFragment(), ParticipantAboutFe
     }
 
     private fun init(savedInstanceState: Bundle?) {
-        mCollapsingText.setTextColor(UiUtils.getColorStateList(requireContext(), R.color.colorDark))
+        mCollapsingText.setTextColor(getColorStates(R.color.colorDark))
         mCollapsingLayout.setBackgroundResource(R.color.colorBlack)
         mCollapsingLayout.setContentScrimResource(R.color.colorAppYellow)
         mCollapsingImage.setImageResource(R.drawable.image_appbar)

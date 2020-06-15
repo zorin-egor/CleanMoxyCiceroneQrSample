@@ -57,7 +57,21 @@ class VolunteerQrReaderPresenter : BasePresenter<VolunteerQrReaderView>() {
             mIsEnabled = false
 
             mQrJob?.cancel()
-            mQrJob = mRoutinesIO.run({ foreground, instance ->
+            mQrJob = mRoutinesIO.run({
+                handlerError(it)
+
+                when(it) {
+                    is AuthException -> {
+                        mRouter.newRootScreen(ActivitiesScreen.RegistrationScreen())
+                    }
+
+                    else -> {
+                        mStateTimer.start()
+                    }
+                }
+            }, {
+                mStateTimer.start()
+            }) { foreground ->
                 foreground.launch {
                     viewState.onProgressBarVisibility(true)
                 }
@@ -98,22 +112,7 @@ class VolunteerQrReaderPresenter : BasePresenter<VolunteerQrReaderView>() {
                     mRandomError = true
                     throw ConnectionException()
                 }
-
-            }, {
-                mStateTimer.start()
-            }, {
-                handlerError(it)
-
-                when(it) {
-                    is AuthException -> {
-                        mRouter.newRootScreen(ActivitiesScreen.RegistrationScreen())
-                    }
-
-                    else -> {
-                        mStateTimer.start()
-                    }
-                }
-            })
+            }
         }
     }
 

@@ -4,7 +4,7 @@ import android.graphics.BitmapFactory
 import com.arellomobile.mvp.InjectViewState
 import com.sample.qr.App
 import com.sample.qr.R
-import com.sample.qr.managers.utils.BitmapUtils
+import com.sample.qr.managers.extensions.scale
 import com.sample.qr.mvp.models.HeaderAboutItem
 import com.sample.qr.mvp.models.ImageAboutItem
 import com.sample.qr.mvp.models.TextAboutItem
@@ -36,14 +36,14 @@ class ParticipantAboutFestivalPresenter : BasePresenter<ParticipantAboutFestival
                 TextAboutItem(mContext.getString(R.string.participant_festival_about_content))
         ))
 
-        mRoutinesCommon.run({ foreground, instance ->
-            BitmapFactory.decodeResource(mContext.resources, R.drawable.image_background).let {
-                BitmapUtils.scale(it, 0.5f)
-            }
-        }, {
+        mRoutinesCommon.run(onComplete = {
             imageItem.bitmap = it
             viewState.onUpdateItem(imageItem)
-        })
+        }) {
+            BitmapFactory.decodeResource(mContext.resources, R.drawable.image_background).let {
+                it.scale(0.5f)
+            }
+        }
     }
 
 }

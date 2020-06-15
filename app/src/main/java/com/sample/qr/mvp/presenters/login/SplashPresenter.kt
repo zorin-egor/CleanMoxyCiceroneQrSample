@@ -20,13 +20,13 @@ class SplashPresenter : BasePresenter<SplashView>() {
     }
 
     fun init() {
-        mRoutinesCommon.run({ foreground, instance ->
+        mRoutinesCommon.run { foreground ->
             delay(2000)
 
             foreground.launch {
                 mRouter.newRootScreen(ActivitiesScreen.RegistrationScreen())
             }
-        })
+        }
     }
 
 }

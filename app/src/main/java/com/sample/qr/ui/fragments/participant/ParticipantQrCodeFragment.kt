@@ -9,7 +9,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.updatePadding
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.sample.qr.R
-import com.sample.qr.managers.utils.UiUtils
+import com.sample.qr.managers.extensions.getColorStates
 import com.sample.qr.mvp.presenters.participant.ParticipantQrCodePresenter
 import com.sample.qr.mvp.screens.ActivitiesScreen
 import com.sample.qr.mvp.screens.FragmentsScreen
@@ -95,10 +95,10 @@ class ParticipantQrCodeFragment : BaseFragment(), ParticipantQrCodeView, View.On
     }
 
     private fun initViews() {
-        festivalHeaderTitle.setTextColor(UiUtils.getColorStateList(requireContext(), R.color.colorLightYellow))
-        festivalHeaderDate.setTextColor(UiUtils.getColorStateList(requireContext(), R.color.colorLightYellow))
-        participantQrCodeName.setTextColor(UiUtils.getColorStateList(requireContext(), R.color.colorLightYellow))
-        participantQrCodeTitle.setTextColor(UiUtils.getColorStateList(requireContext(), R.color.colorLightYellow))
+        festivalHeaderTitle.setTextColor(getColorStates(R.color.colorLightYellow))
+        festivalHeaderDate.setTextColor(getColorStates(R.color.colorLightYellow))
+        participantQrCodeName.setTextColor(getColorStates(R.color.colorLightYellow))
+        participantQrCodeTitle.setTextColor(getColorStates(R.color.colorLightYellow))
 
         mFestivalButtonBinder = ImageButtonBinder(participantQrCodeFestivalButton).apply {
             setOnClickListener(this@ParticipantQrCodeFragment)

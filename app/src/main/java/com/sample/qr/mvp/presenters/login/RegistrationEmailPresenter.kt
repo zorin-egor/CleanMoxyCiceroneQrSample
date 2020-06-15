@@ -5,7 +5,7 @@ import com.arellomobile.mvp.InjectViewState
 import com.sample.qr.App
 import com.sample.qr.R
 import com.sample.qr.managers.exceptions.AuthException
-import com.sample.qr.managers.utils.BitmapUtils
+import com.sample.qr.managers.extensions.text
 import com.sample.qr.mvp.presenters.base.BasePresenter
 import com.sample.qr.mvp.screens.ActivitiesScreen
 import com.sample.qr.mvp.views.login.RegistrationEmailView
@@ -69,7 +69,11 @@ class RegistrationEmailPresenter : BasePresenter<RegistrationEmailView>() {
         }
 
         mRegistrationJob?.cancel()
-        mRegistrationJob = mRoutinesIO.run({ foreground, instance ->
+        mRegistrationJob = mRoutinesIO.run({
+            handlerError(it)
+            viewState.onRegistrationButtonState(true)
+            viewState.onMessage(mContext.getString(R.string.error_retry))
+        }) { foreground ->
             foreground.launch {
                 viewState.onRegistrationButtonState(false, true)
             }
@@ -97,15 +101,15 @@ class RegistrationEmailPresenter : BasePresenter<RegistrationEmailView>() {
                 throw AuthException()
             }
 
-        }) {
-            handlerError(it)
-            viewState.onRegistrationButtonState(true)
-            viewState.onMessage(mContext.getString(R.string.error_retry))
         }
     }
 
     fun captcha() {
-        mCaptchaJob = mRoutinesIO.run({ foreground, instance ->
+        mCaptchaJob = mRoutinesIO.run({
+            viewState.onCaptchaProgress(false)
+        }, {
+            viewState.onCaptchaProgress(false)
+        }) { foreground ->
             foreground.launch {
                 viewState.onCaptchaProgress(true)
                 viewState.onCaptchaBitmap(null)
@@ -113,17 +117,12 @@ class RegistrationEmailPresenter : BasePresenter<RegistrationEmailView>() {
 
             delay(1000)
             mCaptcha = UUID.randomUUID().toString().substring(0, 5)
-            val bitmap = BitmapUtils.text(mCaptcha, 40.0f, 0xFF000000.toInt())
+            val bitmap = mCaptcha.text(40.0f, 0xFF000000.toInt())
 
             foreground.launch {
                 viewState.onCaptchaBitmap(bitmap)
             }
-
-        }, {
-            viewState.onCaptchaProgress(false)
-        }, {
-            viewState.onCaptchaProgress(false)
-        })
+        }
     }
 
 }

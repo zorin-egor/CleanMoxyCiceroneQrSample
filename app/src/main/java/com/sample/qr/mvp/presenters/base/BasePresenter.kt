@@ -33,6 +33,12 @@ abstract class BasePresenter<View: BaseView> : MvpPresenter<View>() {
     protected val mRoutinesCommon = Coroutine()
     protected val mRoutinesIO = Coroutine(Dispatchers.IO)
 
+    override fun onDestroy() {
+        super.onDestroy()
+        mRoutinesCommon.cancel()
+        mRoutinesIO.cancel()
+    }
+
     protected fun getString(@StringRes value: Int): String {
         return mContext.getString(value)
     }

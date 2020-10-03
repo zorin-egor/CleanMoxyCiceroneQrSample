@@ -6,10 +6,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.webkit.WebView
+import android.webkit.WebViewClient
 import com.sample.qr.R
 import com.sample.qr.ui.activities.login.RegistrationActivity
 import com.sample.qr.ui.fragments.base.BaseFragment
 import kotlinx.android.synthetic.main.fragment_html_viewer.*
+
 
 class HtmlViewerFragment : BaseFragment() {
 
@@ -66,7 +69,10 @@ class HtmlViewerFragment : BaseFragment() {
     private fun initArgs() {
         arguments?.let { args ->
             webView.apply {
+                webViewClient = WebClient()
                 settings.javaScriptEnabled = true
+                settings.loadWithOverviewMode = true
+                settings.useWideViewPort = true
             }
 
             when {
@@ -77,4 +83,11 @@ class HtmlViewerFragment : BaseFragment() {
         } ?: throw IllegalArgumentException("${HtmlViewerFragment::class.java.simpleName} must contain argument!")
     }
 
+}
+
+private class WebClient : WebViewClient() {
+    override fun shouldOverrideUrlLoading(view: WebView, url: String): Boolean {
+        view.loadUrl(url)
+        return true
+    }
 }

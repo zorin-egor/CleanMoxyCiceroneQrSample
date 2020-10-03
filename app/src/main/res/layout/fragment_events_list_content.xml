@@ -36,21 +36,21 @@
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/aboutListCollapsingToolbar"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom"
+                android:layout_height="@dimen/toolbar_title_height"
                 app:layout_collapseMode="pin"
                 app:popupTheme="@style/AppTheme">
 
                 <FrameLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="wrap_content">
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/aboutListCollapsingToolbarText"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:paddingTop="@dimen/default_medium"
                         android:paddingBottom="@dimen/default_medium"
-                        android:layout_gravity="center_horizontal|bottom"
+                        android:layout_gravity="center"
                         android:visibility="invisible"
                         android:gravity="center"
                         />

@@ -8,11 +8,14 @@ import android.os.Build
 import android.text.Spanned
 import android.view.Gravity
 import android.view.View
+import android.view.ViewGroup
 import android.view.WindowManager
 import android.widget.TextView
 import androidx.annotation.ColorRes
+import androidx.annotation.Px
 import androidx.annotation.StringRes
 import androidx.core.content.ContextCompat
+import androidx.core.view.updateMarginsRelative
 import androidx.fragment.app.Fragment
 import com.google.android.material.snackbar.BaseTransientBottomBar
 import com.google.android.material.snackbar.Snackbar
@@ -106,5 +109,14 @@ fun Activity.setNoLimits(isNoLimits: Boolean) {
         } else {
             clearFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS)
         }
+    }
+}
+
+fun View.updateMargins(@Px start: Int? = null, @Px top: Int? = null, @Px end: Int? = null, @Px bottom: Int? = null) {
+    (layoutParams as? ViewGroup.MarginLayoutParams)?.apply {
+        start?.also { updateMarginsRelative(start = it) }
+        top?.also { updateMarginsRelative(top = it) }
+        end?.also { updateMarginsRelative(end = it) }
+        bottom?.also { updateMarginsRelative(bottom = it) }
     }
 }

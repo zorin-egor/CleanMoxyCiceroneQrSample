@@ -12,6 +12,7 @@ import androidx.core.view.updatePadding
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.appbar.CollapsingToolbarLayout
 import com.sample.qr.R
+import com.sample.qr.managers.extensions.updateMargins
 import com.sample.qr.ui.adapters.common.AboutListAdapter
 import com.sample.qr.ui.binders.ImageButtonBinder
 import com.sample.qr.ui.fragments.base.BaseFragment
@@ -77,9 +78,7 @@ abstract class AboutListFragment : BaseFragment(), View.OnClickListener,
 
     private fun init(view: View, savedInstanceState: Bundle?) {
         aboutListContainerLayout.setOnApplyWindowInsetsListener { view, insets ->
-            aboutListCollapsingToolbar.apply {
-                layoutParams.height = insets.systemWindowInsetTop + aboutListCollapsingToolbarText.measuredHeight
-            }.requestLayout()
+            aboutListCollapsingToolbar.updateMargins(top = insets.systemWindowInsetTop)
             aboutListContainerLayout.updatePadding(bottom = insets.systemWindowInsetBottom)
             insets
         }

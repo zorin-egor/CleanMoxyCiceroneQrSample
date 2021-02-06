@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    style="@style/CommonScrollView"
+    android:id="@+id/participantQrCodeContainer"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/participantQrCodeLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/splashBackgroundImageView"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:scaleType="centerCrop"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:src="@drawable/image_splash"
+            />
+
+        <include
+            layout="@layout/view_button_image_round"
+            android:id="@+id/participantQrLogout"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/button_height_mini"
+            android:layout_marginTop="@dimen/default_xxlarge"
+            android:layout_marginEnd="@dimen/default_medium"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            />
+
+        <include
+            layout="@layout/view_festival_header"
+            android:id="@+id/participantQrCodeHeaderLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/views_margin_top"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.05"
+            />
+
+        <FrameLayout
+            android:id="@+id/participantQrCodeImageLayout"
+            android:layout_width="@dimen/views_qr_code_size"
+            android:layout_height="@dimen/views_qr_code_size"
+            android:layout_marginTop="@dimen/default_xlarge"
+            app:layout_constraintTop_toBottomOf="@+id/participantQrCodeHeaderLayout"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/participantQrCodeImageView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:background="@color/colorWhite"
+                />
+
+            <ProgressBar
+                style="@android:style/Widget.Holo.ProgressBar"
+                android:id="@+id/participantQrCodeImageProgress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@android:color/transparent"
+                android:indeterminate="true"
+                />
+        </FrameLayout>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            style="@style/SmallTextView"
+            android:id="@+id/participantQrCodeTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/participant_qr_code_image_title"
+            android:textStyle="bold"
+            android:layout_marginTop="@dimen/default_medium"
+            app:layout_constraintTop_toBottomOf="@+id/participantQrCodeImageLayout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintVertical_bias="0.0"
+            />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            style="@style/LargeTextView"
+            android:id="@+id/participantQrCodeName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:layout_marginTop="@dimen/default_xxlarge"
+            app:layout_constraintTop_toBottomOf="@+id/participantQrCodeTitle"
+            app:layout_constraintBottom_toTopOf="@+id/participantQrCodeFestivalButton"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintVertical_bias="0.0"
+            />
+
+        <include
+            layout="@layout/view_button_image_round"
+            android:id="@+id/participantQrCodeFestivalButton"
+            android:layout_width="@dimen/views_width"
+            android:layout_height="@dimen/default_button_height"
+            android:layout_marginTop="@dimen/default_xlarge"
+            android:layout_marginBottom="@dimen/default_medium"
+            android:layout_marginStart="@dimen/default_xlarge"
+            android:layout_marginEnd="@dimen/default_xlarge"
+            app:layout_constraintBottom_toTopOf="@+id/participantQrCodeMovementButton"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            />
+
+        <include
+            layout="@layout/view_button_image_round"
+            android:id="@+id/participantQrCodeMovementButton"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/default_button_height"
+            android:layout_marginTop="@dimen/default_large"
+            android:layout_marginBottom="@dimen/default_large"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/participantQrCodeFestivalButton"
+            app:layout_constraintEnd_toEndOf="@+id/participantQrCodeFestivalButton"
+            />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
+

@@ -1,0 +1,191 @@
+<resources>
+
+    <!-- ======================================================================================= -->
+    <!-- Base application theme. -->
+    <style name="AppBaseTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:windowBackground">@android:color/white</item>
+        <item name="android:windowEnableSplitTouch">false</item>
+        <item name="android:splitMotionEvents">false</item>
+        <item name="android:windowDisablePreview">true</item>
+    </style>
+
+    <style name="AppTheme" parent="AppBaseTheme">
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Light">
+    </style>
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light">
+        <item name="android:textColor">@color/colorDark</item>
+        <item name="android:textSize">@dimen/fonts_size_large</item>
+    </style>
+
+    <!-- ======================================================================================= -->
+    <!-- Local customizations -->
+    <!-- ActivitiesScreen themes-->
+    <style name="NoActionBarTheme" parent="AppTheme">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="SplashActivity" parent="NoActionBarTheme"/>
+    <style name="RegistrationActivity" parent="NoActionBarTheme"/>
+    <style name="ParticipantsActivity" parent="NoActionBarTheme"/>
+    <style name="VolunteerActivity" parent="NoActionBarTheme"/>
+
+
+    <!-- ======================================================================================= -->
+    <!-- Common views-->
+    <style name="CommonTextView" parent="AppTheme">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:focusable">false</item>
+        <item name="android:clickable">false</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:textColor">@color/colorDark</item>
+        <item name="android:lineSpacingMultiplier">1.0</item>
+    </style>
+
+    <!-- Switch button -->
+    <style name="CommonSwitchView" parent="AppTheme">
+        <item name="colorControlActivated">@color/colorAccent</item>
+    </style>
+
+    <style name="CommonButton" parent="AppTheme">
+        <item name="android:layout_width">@dimen/default_button_width</item>
+        <item name="android:layout_height">@dimen/default_button_height</item>
+        <item name="android:background">@drawable/drawable_ripple_rectangle_white_rounded</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="CommonEditText" parent="AppTheme">
+        <item name="android:textColor">@color/colorDark</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:lines">1</item>
+    </style>
+
+    <style name="CommonView" parent="AppTheme">
+        <item name="android:background">@drawable/drawable_ripple_rectangle_transparent</item>
+    </style>
+
+    <style name="CommonImageView" parent="AppTheme">
+        <item name="android:foreground">@drawable/drawable_ripple_rectangle_transparent</item>
+    </style>
+
+    <style name="CommonImageButton" parent="AppTheme">
+        <item name="android:background">@drawable/drawable_ripple_borderless</item>
+    </style>
+
+    <style name="CommonScrollView" parent="AppTheme">
+        <item name="android:scrollbars">none</item>
+        <item name="android:fillViewport">true</item>
+        <item name="android:overScrollMode">never</item>
+        <item name="android:orientation">vertical</item>
+    </style>
+
+    <style name="CommonRecycleView" parent="AppTheme">
+        <item name="android:scrollbars">none</item>
+        <item name="android:fillViewport">true</item>
+        <item name="android:overScrollMode">never</item>
+    </style>
+
+    <style name="CommonProgressBar" parent="AppTheme"/>
+
+    <!-- ======================================================================================= -->
+    <!-- Selectable background -->
+    <style name="RippleView" parent="CommonView">
+        <item name="android:background">@drawable/drawable_ripple_rectangle_white</item>
+    </style>
+
+    <style name="RoundedRippleView" parent="CommonView">
+        <item name="android:background">@drawable/drawable_ripple_rectangle_white_rounded</item>
+    </style>
+
+    <style name="RoundedContourView" parent="CommonView">
+        <item name="android:background">@drawable/drawable_ripple_contour_rounded</item>
+    </style>
+
+    <style name="RoundedCommonView" parent="RoundedRippleView">
+        <item name="android:paddingTop">@dimen/default_small</item>
+        <item name="android:paddingBottom">@dimen/default_small</item>
+        <item name="android:paddingLeft">@dimen/default_medium</item>
+        <item name="android:paddingRight">@dimen/default_medium</item>
+    </style>
+
+    <!-- ======================================================================================= -->
+    <!-- TextView -->
+    <style name="LargeTextView" parent="CommonTextView">
+        <item name="android:textAppearance">?android:attr/textAppearanceLarge</item>
+        <item name="android:textSize">@dimen/fonts_size_large</item>
+    </style>
+
+    <style name="MediumTextView" parent="CommonTextView">
+        <item name="android:textAppearance">?android:attr/textAppearanceMedium</item>
+        <item name="android:textSize">@dimen/fonts_size_medium</item>
+    </style>
+
+    <style name="SmallTextView" parent="CommonTextView">
+        <item name="android:textAppearance">?android:attr/textAppearanceSmall</item>
+        <item name="android:textSize">@dimen/fonts_size_small</item>
+    </style>
+
+    <style name="MiniTextView" parent="CommonTextView">
+        <item name="android:textAppearance">?android:attr/textAppearanceSmall</item>
+        <item name="android:textSize">@dimen/fonts_size_mini</item>
+    </style>
+
+    <!-- ======================================================================================= -->
+    <!-- EditView -->
+    <style name="ContourRoundedEdit" parent="CommonEditText">
+        <item name="android:background">@drawable/drawable_edit_contour_rounded</item>
+        <item name="android:backgroundTint">@color/colorDarkLightTint</item>
+        <item name="android:textCursorDrawable">@drawable/drawable_edit_cursor</item>
+        <item name="android:textColorHint">@color/colorDarkLightTint</item>
+        <item name="android:textSize">@dimen/fonts_size_large</item>
+        <item name="android:paddingTop">@dimen/default_medium</item>
+        <item name="android:paddingBottom">@dimen/default_medium</item>
+        <item name="android:paddingStart">@dimen/default_large</item>
+        <item name="android:paddingEnd">@dimen/default_large</item>
+        <item name="android:gravity">left|center_vertical</item>
+    </style>
+
+    <!-- ======================================================================================= -->
+    <!-- Views -->
+    <style name="SeparatorView" parent="CommonView">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/default_stroke</item>
+        <item name="android:background">@color/colorWhite</item>
+        <item name="android:backgroundTint">@color/colorLightGreyTint</item>
+        <item name="android:clickable">false</item>
+    </style>
+
+    <!-- ======================================================================================= -->
+    <!-- ImageView -->
+    <style name="RippleImageView" parent="CommonImageView">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <!-- ======================================================================================= -->
+    <!-- ImageButton -->
+    <style name="RippleImageButton" parent="CommonImageButton">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:padding">@dimen/default_small</item>
+    </style>
+
+    <!-- ======================================================================================= -->
+    <!-- Buttons -->
+    <style name="TransparentAccentButtons" parent="CommonButton">
+        <item name="android:textColor">@drawable/drawable_selector_button_transparent_text_color</item>
+    </style>
+
+</resources>

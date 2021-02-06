@@ -1,0 +1,79 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+android {
+    compileSdkVersion SDK_MAX
+    buildToolsVersion BUILD_TOOL
+
+    defaultConfig {
+        minSdkVersion SDK_MIN
+        targetSdkVersion SDK_MAX
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments.putAll([
+                        "disableEmptyStrategyCheck" : "true",
+                        "defaultMoxyStrategy" : "moxy.viewstate.strategy.SkipStrategy"
+                ])
+            }
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+}
+
+dependencies {
+    implementation project(":data")
+    implementation project(":domain")
+
+    implementation "com.google.android.material:material:$XMATERIAL"
+    implementation "com.google.android.gms:play-services-vision:$GOOGLE_VISION"
+
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$KOTLIN"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$KOTLIN_COROUTINES"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$KOTLIN_COROUTINES"
+
+    implementation "androidx.appcompat:appcompat:$XAPPCOMPAT"
+    implementation "androidx.recyclerview:recyclerview:$XRECYCLERVIEW"
+    implementation "androidx.cardview:cardview:$XCARDVIEW"
+    implementation "androidx.constraintlayout:constraintlayout:$XCONSTRAINT"
+    implementation "androidx.exifinterface:exifinterface:$XEXIFINTERFACE"
+    implementation "androidx.core:core-ktx:$XCORE"
+
+    implementation "com.google.dagger:dagger:$DAGGER"
+    kapt "com.google.dagger:dagger-compiler:$DAGGER"
+
+    implementation "com.github.moxy-community:moxy:$MOXY"
+    implementation "com.github.moxy-community:moxy-ktx:$MOXY"
+    implementation "com.github.moxy-community:moxy-androidx:$MOXY"
+    kapt "com.github.moxy-community:moxy-compiler:$MOXY"
+
+    implementation "ru.terrakok.cicerone:cicerone:$CICERONE"
+
+    implementation "com.google.zxing:core:$ZXING_CORE"
+
+    testImplementation 'junit:junit:4.+'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+}

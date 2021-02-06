@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="button_height_mini">32dp</dimen>
+    <dimen name="views_margin_top">32dp</dimen>
+    <dimen name="views_width">0dp</dimen>
+    <dimen name="views_frame_height">250dp</dimen>
+    <dimen name="views_qr_reader_height">350dp</dimen>
+    <dimen name="views_qr_code_size">250dp</dimen>
+    <dimen name="collapsing_toolbar_height">150dp</dimen>
+    <dimen name="recycler_view_padding">0dp</dimen>
+    <dimen name="captcha_width">150dp</dimen>
+    <dimen name="toolbar_title_height">32dp</dimen>
+</resources>

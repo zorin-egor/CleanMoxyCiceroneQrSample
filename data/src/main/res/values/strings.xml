@@ -1,0 +1,13 @@
+<resources>
+    <string name="qr_data">https://github.com/zorin-egor</string>
+    <string name="about_header">Incredible event</string>
+    <string name="about_title">Some event description</string>
+    <string name="about_description">
+        There are hundreds of festivals taking place every month all over the world.
+        They are often connected with celebrations of certain holidays, for example, New Year Day,
+        St. Patrick’s Day, Shrove Tuesday, Mother’s Day, May Day, Children’s Day, Halloween, etc.
+        There are also some festivals, which are not connected with common holidays,
+        but are cheerfully celebrated in certain countries. For example, Songkran – Thai New Year,
+        La Tomatina, Oktoberfest, Glastonbury Festival, Guy Fawkes Night, Notting Hill Carnival, Holi.
+    </string>
+</resources>

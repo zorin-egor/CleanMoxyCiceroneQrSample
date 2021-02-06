@@ -1,6 +1,6 @@
-# MoxyCiceroneQr sample
+# CleanMoxyCiceroneQr sample
 
-<b>MoxyCiceroneQr</b> - sample app with mvp architecture and cicerone navigation.
+<b>CleanMoxyCiceroneQr</b> - sample app with clean architecture, mvp moxy and cicerone navigation.
 The application simulates the operation of the controller, which verifies the user by scanning the code.
 A code is generated for the user that the controller can check.
 
@@ -15,6 +15,6 @@ A code is generated for the user that the controller can check.
 ## Screenshots
 <p align="center">
   <a>
-    <img alt="MvpCiceroneQr" src="https://user-images.githubusercontent.com/13707343/82047123-e9463f80-96ba-11ea-9a6e-829304465e6e.gif" />
+    <img alt="CleanMvpCiceroneQr" src="https://user-images.githubusercontent.com/13707343/82047123-e9463f80-96ba-11ea-9a6e-829304465e6e.gif" />
   </a>
 </p>

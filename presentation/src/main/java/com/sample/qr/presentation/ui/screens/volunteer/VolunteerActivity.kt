@@ -4,8 +4,9 @@ import android.os.Bundle
 import com.sample.qr.presentation.R
 import com.sample.qr.presentation.extensions.setFullscreen
 import com.sample.qr.presentation.extensions.setStatusBarLight
-import com.sample.qr.presentation.navigation.FragmentsScreen
+import com.sample.qr.presentation.extensions.show
 import com.sample.qr.presentation.ui.screens.base.BaseActivity
+import com.sample.qr.presentation.ui.screens.volunteer.qr.VolunteerQrReaderFragment
 
 internal class VolunteerActivity : BaseActivity() {
 
@@ -18,7 +19,8 @@ internal class VolunteerActivity : BaseActivity() {
         setFullscreen(true)
 
         if (savedInstanceState == null) {
-            mRouter.replaceScreen(FragmentsScreen.VolunteerQrReaderScreen())
+//            mRouter.replaceScreen(FragmentsScreen.VolunteerQrReaderScreen())
+            supportFragmentManager.show(VolunteerQrReaderFragment.newInstance(), R.id.frameContainer, false, null)
         }
     }
 }

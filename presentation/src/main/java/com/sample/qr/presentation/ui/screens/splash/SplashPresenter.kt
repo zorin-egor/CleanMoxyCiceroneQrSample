@@ -2,8 +2,11 @@ package com.sample.qr.presentation.ui.screens.splash
 
 import android.app.Application
 import com.sample.qr.domain.interactors.splash.SplashInteractor
-import com.sample.qr.presentation.navigation.ActivitiesScreen
+import com.sample.qr.presentation.extensions.startNewClear
 import com.sample.qr.presentation.ui.screens.base.BasePresenter
+import com.sample.qr.presentation.ui.screens.login.RegistrationActivity
+import com.sample.qr.presentation.ui.screens.participant.ParticipantActivity
+import com.sample.qr.presentation.ui.screens.volunteer.VolunteerActivity
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import moxy.InjectViewState
@@ -28,13 +31,16 @@ class SplashPresenter @Inject constructor(
 
             when {
                 isAuthenticated && isParticipantLogin -> {
-                    router.newRootScreen(ActivitiesScreen.ParticipantScreen())
+//                    router.newRootScreen(ActivitiesScreen.ParticipantScreen())
+                    app.startNewClear<ParticipantActivity>()
                 }
                 isAuthenticated && !isParticipantLogin -> {
-                    router.newRootScreen(ActivitiesScreen.VolunteerScreen())
+//                    router.newRootScreen(ActivitiesScreen.VolunteerScreen())
+                    app.startNewClear<VolunteerActivity>()
                 }
                 else -> {
-                    router.newRootScreen(ActivitiesScreen.RegistrationScreen())
+//                    router.newRootScreen(ActivitiesScreen.RegistrationScreen())
+                    app.startNewClear<RegistrationActivity>()
                 }
             }
         }

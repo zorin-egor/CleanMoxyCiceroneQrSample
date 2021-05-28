@@ -2,7 +2,10 @@ package com.sample.qr.presentation.ui.screens.base
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import com.google.android.material.snackbar.Snackbar
 import com.sample.qr.presentation.R
 import com.sample.qr.presentation.di.PresentationComponent
@@ -17,6 +20,7 @@ abstract class BaseFragment : MvpAppCompatFragment(), BaseActivity.OnBackPressFr
     BaseView {
 
     companion object {
+        private val TAG = BaseFragment::class.java.simpleName
         const val PERMISSION_CAMERA = 1
         const val REQUEST_CAMERA = 1000
     }
@@ -36,25 +40,65 @@ abstract class BaseFragment : MvpAppCompatFragment(), BaseActivity.OnBackPressFr
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
+        Log.d(TAG, "$this-onAttach()")
         provideComponent(presentationComponent)
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        Log.d(TAG, "$this-onCreate($savedInstanceState)")
+    }
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        Log.d(TAG, "$this-onCreateView($savedInstanceState)")
+        return super.onCreateView(inflater, container, savedInstanceState)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        Log.d(TAG, "$this-onViewCreated($savedInstanceState)")
         init(view, savedInstanceState)
+    }
+
+    override fun onStart() {
+        super.onStart()
+        Log.d(TAG, "$this-onStart()")
+    }
+
+    override fun onResume() {
+        super.onResume()
+        Log.d(TAG, "$this-onResume()")
+    }
+
+    override fun onPause() {
+        super.onPause()
+        Log.d(TAG, "$this-onPause()")
+    }
+
+    override fun onStop() {
+        super.onStop()
+        Log.d(TAG, "$this-onStop()")
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        Log.d(TAG, "$this-onDestroyView()")
     }
 
     override fun onDestroy() {
         mSnackBar = null
+        Log.d(TAG, "$this-onDestroy(${requireActivity().isFinishing})")
         super.onDestroy()
     }
 
     override fun onBackPressed(): Boolean {
+        Log.d(TAG, "$this-onBackPressed()")
         return false
     }
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        Log.d(TAG, "$this-onRequestPermissionsResult($requestCode, $permissions, $grantResults)")
         when (requestCode) {
             PERMISSION_CAMERA -> {
                 onCameraPermission(isResultsGranted(permissions, grantResults))

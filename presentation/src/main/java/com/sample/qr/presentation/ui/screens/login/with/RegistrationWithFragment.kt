@@ -6,8 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import com.sample.qr.presentation.R
 import com.sample.qr.presentation.di.PresentationComponent
-import com.sample.qr.presentation.navigation.FragmentsScreen
+import com.sample.qr.presentation.extensions.show
 import com.sample.qr.presentation.ui.screens.base.BaseFragment
+import com.sample.qr.presentation.ui.screens.common.HtmlViewerFragment
+import com.sample.qr.presentation.ui.screens.login.email.RegistrationEmailFragment
+import com.sample.qr.presentation.ui.screens.volunteer.login.VolunteerLoginFragment
 import com.sample.qr.presentation.ui.views.binders.ImageButtonBinder
 import com.sample.qr.presentation.ui.views.binders.ToolbarTextBinder
 import kotlinx.android.synthetic.main.fragment_registration_with.*
@@ -48,7 +51,8 @@ class RegistrationWithFragment : BaseFragment(), RegistrationWithView, View.OnCl
     override fun onClick(v: View) {
         when(v.id) {
             R.id.registrationWithEmailButton -> {
-                mRouter.navigateTo(FragmentsScreen.RegistrationEmailScreen())
+//                mRouter.navigateTo(FragmentsScreen.RegistrationEmailScreen())
+                requireFragmentManager().show(RegistrationEmailFragment.newInstance(), R.id.frameContainer)
             }
 
             R.id.registrationWithAgreementCheck -> {
@@ -56,11 +60,13 @@ class RegistrationWithFragment : BaseFragment(), RegistrationWithView, View.OnCl
             }
 
             R.id.registrationWithAgreementButton -> {
-                mRouter.navigateTo(FragmentsScreen.AgreementScreen(getString(R.string.url_license)))
+//                mRouter.navigateTo(FragmentsScreen.AgreementScreen(getString(R.string.url_license)))
+                requireFragmentManager().show(HtmlViewerFragment.newUrlInstance(getString(R.string.url_license)), R.id.frameContainer)
             }
 
             R.id.registrationWithVolunteerButton -> {
-                mRouter.navigateTo(FragmentsScreen.VolunteerLoginScreen())
+//                mRouter.navigateTo(FragmentsScreen.VolunteerLoginScreen())
+                requireFragmentManager().show(VolunteerLoginFragment.newInstance(), R.id.frameContainer)
             }
         }
     }

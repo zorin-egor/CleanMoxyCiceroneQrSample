@@ -1,6 +1,7 @@
 package com.sample.qr.presentation.ui.screens.base
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.annotation.StringRes
 import androidx.fragment.app.Fragment
@@ -17,6 +18,10 @@ import ru.terrakok.cicerone.android.support.SupportAppNavigator
 import javax.inject.Inject
 
 abstract class BaseActivity : MvpAppCompatActivity() {
+
+    companion object {
+        private val TAG = BaseActivity::class.java.simpleName
+    }
 
     interface OnBackPressFragment {
         fun onBackPressed(): Boolean
@@ -47,22 +52,50 @@ abstract class BaseActivity : MvpAppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         provideComponent(presentationComponent)
         super.onCreate(savedInstanceState)
+        Log.d(TAG, "$this-onCreate($savedInstanceState)")
         init(savedInstanceState)
+    }
+    override fun onRestoreInstanceState(savedInstanceState: Bundle) {
+        super.onRestoreInstanceState(savedInstanceState)
+        Log.d(TAG, "$this-onRestoreInstanceState($savedInstanceState)")
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        Log.d(TAG, "$this-onSaveInstanceState()")
+    }
+
+    override fun onRestart() {
+        super.onRestart()
+        Log.d(TAG, "$this-onRestart()")
+    }
+
+    override fun onStart() {
+        super.onStart()
+        Log.d(TAG, "$this-onStart()")
+    }
+
+    override fun onStop() {
+        super.onStop()
+        Log.d(TAG, "$this-onStop()")
     }
 
     override fun onDestroy() {
+        Log.d(TAG, "$this-onDestroy($isFinishing)")
         mSnackBar = null
         super.onDestroy()
     }
 
     override fun onBackPressed() {
+        Log.d(TAG, "$this-onBackPressed()")
         if (!isFragmentBackPress()) {
-            mRouter.exit()
+//            mRouter.exit()
+            super.onBackPressed()
         }
     }
 
     protected fun isFragmentBackPress(): Boolean {
-        supportFragmentManager.fragments?.asReversed().forEach { parentFragment ->
+        supportFragmentManager.fragments.asReversed().forEach { parentFragment ->
             if (isFragmentBackPress(parentFragment)) {
                 return true
             }
@@ -71,7 +104,7 @@ abstract class BaseActivity : MvpAppCompatActivity() {
     }
 
     protected fun isFragmentBackPress(fragment: Fragment): Boolean {
-        fragment.childFragmentManager.fragments?.asReversed().forEach { childFragment ->
+        fragment.childFragmentManager.fragments.asReversed().forEach { childFragment ->
             if (isFragmentBackPress(childFragment)) {
                 return true
             }
@@ -81,10 +114,12 @@ abstract class BaseActivity : MvpAppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
+        Log.d(TAG, "$this-onResume()")
         mNavigatorHolder.setNavigator(mNavigator)
     }
 
     override fun onPause() {
+        Log.d(TAG, "$this-onPause()")
         mNavigatorHolder.removeNavigator()
         super.onPause()
     }

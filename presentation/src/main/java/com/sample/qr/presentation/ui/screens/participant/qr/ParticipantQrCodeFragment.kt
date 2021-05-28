@@ -12,8 +12,10 @@ import com.sample.qr.presentation.di.PresentationComponent
 import com.sample.qr.presentation.extensions.getBottom
 import com.sample.qr.presentation.extensions.getColorStates
 import com.sample.qr.presentation.extensions.getTop
-import com.sample.qr.presentation.navigation.FragmentsScreen
+import com.sample.qr.presentation.extensions.show
 import com.sample.qr.presentation.ui.screens.base.BaseFragment
+import com.sample.qr.presentation.ui.screens.participant.festival.ParticipantAboutFestivalFragment
+import com.sample.qr.presentation.ui.screens.participant.movement.ParticipantAboutMovementFragment
 import com.sample.qr.presentation.ui.views.binders.ImageButtonBinder
 import kotlinx.android.synthetic.main.fragment_participant_qr_code.*
 import kotlinx.android.synthetic.main.view_festival_header.*
@@ -54,11 +56,13 @@ class ParticipantQrCodeFragment : BaseFragment(), ParticipantQrCodeView, View.On
     override fun onClick(v: View) {
         when(v.id) {
             R.id.participantQrCodeFestivalButton -> {
-                mRouter.navigateTo(FragmentsScreen.ParticipantAboutFestivalScreen())
+//                mRouter.navigateTo(FragmentsScreen.ParticipantAboutFestivalScreen())
+                requireFragmentManager().show(ParticipantAboutFestivalFragment.newInstance(), R.id.frameContainer)
             }
 
             R.id.participantQrCodeMovementButton -> {
-                mRouter.navigateTo(FragmentsScreen.ParticipantAboutMovementScreen())
+//                mRouter.navigateTo(FragmentsScreen.ParticipantAboutMovementScreen())
+                requireFragmentManager().show(ParticipantAboutMovementFragment.newInstance(), R.id.frameContainer)
             }
 
             R.id.participantQrCodeImageView -> {

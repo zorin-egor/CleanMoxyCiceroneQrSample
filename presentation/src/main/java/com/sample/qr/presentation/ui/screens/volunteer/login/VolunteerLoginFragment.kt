@@ -11,9 +11,11 @@ import android.view.ViewGroup
 import android.widget.TextView
 import com.sample.qr.presentation.R
 import com.sample.qr.presentation.di.PresentationComponent
+import com.sample.qr.presentation.extensions.back
 import com.sample.qr.presentation.extensions.getColorStates
-import com.sample.qr.presentation.navigation.FragmentsScreen
+import com.sample.qr.presentation.extensions.show
 import com.sample.qr.presentation.ui.screens.base.BaseFragment
+import com.sample.qr.presentation.ui.screens.common.HtmlViewerFragment
 import com.sample.qr.presentation.ui.views.binders.ImageButtonBinder
 import com.sample.qr.presentation.ui.views.binders.ToolbarTextBinder
 import kotlinx.android.synthetic.main.fragment_volunteer_login.*
@@ -63,7 +65,8 @@ class VolunteerLoginFragment : BaseFragment(),
     override fun onClick(v: View) {
         when(v.id) {
             R.id.volunteerLoginAgreementButton -> {
-                mRouter.navigateTo(FragmentsScreen.AgreementScreen(""))
+//                mRouter.navigateTo(FragmentsScreen.AgreementScreen(""))
+                requireFragmentManager().show(HtmlViewerFragment.newUrlInstance(""), R.id.frameContainer)
             }
 
             R.id.volunteerLoginRegButton -> {
@@ -118,7 +121,8 @@ class VolunteerLoginFragment : BaseFragment(),
             setTitleSize(R.dimen.fonts_size_xlarge)
             setTitleBold(true)
             setOnBackClickListener {
-                mRouter.exit()
+//                mRouter.exit()
+                requireFragmentManager().back()
             }
         }
 

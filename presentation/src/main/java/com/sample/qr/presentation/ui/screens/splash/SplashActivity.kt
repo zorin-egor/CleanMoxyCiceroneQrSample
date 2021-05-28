@@ -3,7 +3,7 @@ package com.sample.qr.presentation.ui.screens.splash
 import android.os.Bundle
 import com.sample.qr.presentation.R
 import com.sample.qr.presentation.extensions.setFullscreen
-import com.sample.qr.presentation.navigation.FragmentsScreen
+import com.sample.qr.presentation.extensions.show
 import com.sample.qr.presentation.ui.screens.base.BaseActivity
 
 internal class SplashActivity : BaseActivity() {
@@ -16,7 +16,8 @@ internal class SplashActivity : BaseActivity() {
         setFullscreen(true)
 
         if (savedInstanceState == null) {
-            mRouter.newRootScreen(FragmentsScreen.SplashScreen())
+//            mRouter.newRootScreen(FragmentsScreen.SplashScreen())
+            supportFragmentManager.show(SplashFragment.newInstance(), R.id.frameContainer)
         }
     }
 }

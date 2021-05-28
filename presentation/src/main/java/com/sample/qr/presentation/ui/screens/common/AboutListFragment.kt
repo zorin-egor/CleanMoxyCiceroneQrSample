@@ -12,6 +12,7 @@ import androidx.core.view.updatePadding
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.appbar.CollapsingToolbarLayout
 import com.sample.qr.presentation.R
+import com.sample.qr.presentation.extensions.back
 import com.sample.qr.presentation.extensions.getBottom
 import com.sample.qr.presentation.extensions.getTop
 import com.sample.qr.presentation.extensions.updateMargins
@@ -55,7 +56,8 @@ abstract class AboutListFragment : BaseFragment(), View.OnClickListener,
     override fun onClick(v: View) {
         when(v.id) {
             R.id.aboutListContainerButton -> {
-                mRouter.exit()
+//                mRouter.exit()
+                requireFragmentManager().back()
             }
         }
     }

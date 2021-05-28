@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import com.sample.qr.presentation.R
+import com.sample.qr.presentation.extensions.back
 import com.sample.qr.presentation.ui.screens.base.BaseFragment
 import com.sample.qr.presentation.ui.views.binders.ToolbarTextBinder
 import kotlinx.android.synthetic.main.fragment_html_viewer.*
@@ -57,7 +58,8 @@ internal class HtmlViewerFragment : BaseFragment() {
             setTitleSize(R.dimen.fonts_size_xlarge)
             setTitleBold(true)
             setOnBackClickListener {
-                mRouter.exit()
+//                mRouter.exit()
+                requireFragmentManager().back()
             }
         }
     }

@@ -7,8 +7,9 @@ import com.sample.qr.domain.models.Empty
 import com.sample.qr.domain.models.Error
 import com.sample.qr.domain.models.Success
 import com.sample.qr.presentation.R
-import com.sample.qr.presentation.navigation.ActivitiesScreen
+import com.sample.qr.presentation.extensions.startNewClear
 import com.sample.qr.presentation.ui.screens.base.BasePresenter
+import com.sample.qr.presentation.ui.screens.volunteer.VolunteerActivity
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import moxy.InjectViewState
@@ -54,7 +55,10 @@ class VolunteerLoginPresenter @Inject constructor(
                 when (it) {
                     is Error -> handlerError(it)
                     is Empty -> handlerError()
-                    is Success -> router.newRootScreen(ActivitiesScreen.VolunteerScreen())
+                    is Success -> {
+//                        router.newRootScreen(ActivitiesScreen.VolunteerScreen())
+                        app.startNewClear<VolunteerActivity>()
+                    }
                 }
             }
 

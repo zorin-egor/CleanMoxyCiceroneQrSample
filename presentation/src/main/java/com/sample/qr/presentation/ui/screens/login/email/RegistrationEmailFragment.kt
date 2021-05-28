@@ -12,9 +12,11 @@ import android.view.ViewGroup
 import android.widget.TextView
 import com.sample.qr.presentation.R
 import com.sample.qr.presentation.di.PresentationComponent
+import com.sample.qr.presentation.extensions.back
 import com.sample.qr.presentation.extensions.getColorStates
-import com.sample.qr.presentation.navigation.FragmentsScreen
+import com.sample.qr.presentation.extensions.show
 import com.sample.qr.presentation.ui.screens.base.BaseFragment
+import com.sample.qr.presentation.ui.screens.common.HtmlViewerFragment
 import com.sample.qr.presentation.ui.views.binders.ImageButtonBinder
 import com.sample.qr.presentation.ui.views.binders.ToolbarTextBinder
 import kotlinx.android.synthetic.main.fragment_registration_email.*
@@ -64,7 +66,8 @@ class RegistrationEmailFragment : BaseFragment(),
     override fun onClick(v: View) {
         when(v.id) {
             R.id.registrationEmailAgreementButton -> {
-                mRouter.navigateTo(FragmentsScreen.AgreementScreen(getString(R.string.url_license)))
+//                mRouter.navigateTo(FragmentsScreen.AgreementScreen(getString(R.string.url_license)))
+                requireFragmentManager().show(HtmlViewerFragment.newUrlInstance(getString(R.string.url_license)), R.id.frameContainer)
             }
             R.id.registrationEmailRegButton -> {
                 mPresenter.registration(
@@ -127,7 +130,7 @@ class RegistrationEmailFragment : BaseFragment(),
             setTitleSize(R.dimen.fonts_size_xlarge)
             setTitleBold(true)
             setOnBackClickListener {
-                mRouter.exit()
+                requireFragmentManager().back()
             }
         }
 

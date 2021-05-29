@@ -7,7 +7,7 @@ import com.sample.qr.domain.models.Empty
 import com.sample.qr.domain.models.Error
 import com.sample.qr.domain.models.Success
 import com.sample.qr.presentation.R
-import com.sample.qr.presentation.extensions.startNewClear
+import com.sample.qr.presentation.extensions.startClearActivity
 import com.sample.qr.presentation.ui.screens.base.BasePresenter
 import com.sample.qr.presentation.ui.screens.volunteer.VolunteerActivity
 import kotlinx.coroutines.Job
@@ -57,7 +57,7 @@ class VolunteerLoginPresenter @Inject constructor(
                     is Empty -> handlerError()
                     is Success -> {
 //                        router.newRootScreen(ActivitiesScreen.VolunteerScreen())
-                        app.startNewClear<VolunteerActivity>()
+                        app.startClearActivity<VolunteerActivity>()
                     }
                 }
             }

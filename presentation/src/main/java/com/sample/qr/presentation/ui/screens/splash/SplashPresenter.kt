@@ -2,7 +2,7 @@ package com.sample.qr.presentation.ui.screens.splash
 
 import android.app.Application
 import com.sample.qr.domain.interactors.splash.SplashInteractor
-import com.sample.qr.presentation.extensions.startNewClear
+import com.sample.qr.presentation.extensions.startClearActivity
 import com.sample.qr.presentation.ui.screens.base.BasePresenter
 import com.sample.qr.presentation.ui.screens.login.RegistrationActivity
 import com.sample.qr.presentation.ui.screens.participant.ParticipantActivity
@@ -32,18 +32,17 @@ class SplashPresenter @Inject constructor(
             when {
                 isAuthenticated && isParticipantLogin -> {
 //                    router.newRootScreen(ActivitiesScreen.ParticipantScreen())
-                    app.startNewClear<ParticipantActivity>()
+                    app.startClearActivity<ParticipantActivity>()
                 }
                 isAuthenticated && !isParticipantLogin -> {
 //                    router.newRootScreen(ActivitiesScreen.VolunteerScreen())
-                    app.startNewClear<VolunteerActivity>()
+                    app.startClearActivity<VolunteerActivity>()
                 }
                 else -> {
 //                    router.newRootScreen(ActivitiesScreen.RegistrationScreen())
-                    app.startNewClear<RegistrationActivity>()
+                    app.startClearActivity<RegistrationActivity>()
                 }
             }
         }
     }
-
 }

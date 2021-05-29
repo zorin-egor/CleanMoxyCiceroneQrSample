@@ -12,10 +12,7 @@ import androidx.core.view.updatePadding
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.appbar.CollapsingToolbarLayout
 import com.sample.qr.presentation.R
-import com.sample.qr.presentation.extensions.back
-import com.sample.qr.presentation.extensions.getBottom
-import com.sample.qr.presentation.extensions.getTop
-import com.sample.qr.presentation.extensions.updateMargins
+import com.sample.qr.presentation.extensions.*
 import com.sample.qr.presentation.ui.screens.base.BaseFragment
 import com.sample.qr.presentation.ui.screens.common.adapters.AboutListAdapter
 import com.sample.qr.presentation.ui.views.binders.ImageButtonBinder

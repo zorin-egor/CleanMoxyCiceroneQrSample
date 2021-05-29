@@ -5,7 +5,7 @@ import com.sample.qr.domain.interactors.participant.ParticipantInteractor
 import com.sample.qr.domain.models.Empty
 import com.sample.qr.domain.models.Error
 import com.sample.qr.domain.models.Success
-import com.sample.qr.presentation.extensions.startNewClear
+import com.sample.qr.presentation.extensions.startClearActivity
 import com.sample.qr.presentation.extensions.toQrCode
 import com.sample.qr.presentation.ui.screens.base.BasePresenter
 import com.sample.qr.presentation.ui.screens.login.RegistrationActivity
@@ -83,7 +83,7 @@ class ParticipantQrCodePresenter @Inject constructor(
         mLogoutJob = presenterScope.launch {
             interactor.logout()
 //            router.newRootScreen(ActivitiesScreen.RegistrationScreen())
-            app.startNewClear<RegistrationActivity>()
+            app.startClearActivity<RegistrationActivity>()
         }
     }
 }

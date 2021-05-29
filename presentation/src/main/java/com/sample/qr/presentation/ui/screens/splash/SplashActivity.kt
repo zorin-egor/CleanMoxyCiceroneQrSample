@@ -17,7 +17,7 @@ internal class SplashActivity : BaseActivity() {
 
         if (savedInstanceState == null) {
 //            mRouter.newRootScreen(FragmentsScreen.SplashScreen())
-            supportFragmentManager.show(SplashFragment.newInstance(), R.id.frameContainer)
+            supportFragmentManager.show(SplashFragment.newInstance(), R.id.frameContainer, false, null)
         }
     }
 }

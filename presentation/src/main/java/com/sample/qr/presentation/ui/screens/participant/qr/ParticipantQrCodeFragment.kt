@@ -9,10 +9,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.updatePadding
 import com.sample.qr.presentation.R
 import com.sample.qr.presentation.di.PresentationComponent
-import com.sample.qr.presentation.extensions.getBottom
-import com.sample.qr.presentation.extensions.getColorStates
-import com.sample.qr.presentation.extensions.getTop
-import com.sample.qr.presentation.extensions.show
+import com.sample.qr.presentation.extensions.*
 import com.sample.qr.presentation.ui.screens.base.BaseFragment
 import com.sample.qr.presentation.ui.screens.participant.festival.ParticipantAboutFestivalFragment
 import com.sample.qr.presentation.ui.screens.participant.movement.ParticipantAboutMovementFragment

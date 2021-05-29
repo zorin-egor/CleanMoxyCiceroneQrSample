@@ -7,7 +7,7 @@ import com.sample.qr.domain.models.Empty
 import com.sample.qr.domain.models.Error
 import com.sample.qr.domain.models.Success
 import com.sample.qr.presentation.R
-import com.sample.qr.presentation.extensions.startNewClear
+import com.sample.qr.presentation.extensions.startClearActivity
 import com.sample.qr.presentation.extensions.toBitmap
 import com.sample.qr.presentation.ui.screens.base.BasePresenter
 import com.sample.qr.presentation.ui.screens.participant.ParticipantActivity
@@ -73,7 +73,7 @@ class RegistrationEmailPresenter @Inject constructor(
                     is Error -> handlerError(it)
                     is Success -> {
 //                        router.newRootScreen(ActivitiesScreen.ParticipantScreen())
-                        app.startNewClear<ParticipantActivity>()
+                        app.startClearActivity<ParticipantActivity>()
                     }
                 }
             }

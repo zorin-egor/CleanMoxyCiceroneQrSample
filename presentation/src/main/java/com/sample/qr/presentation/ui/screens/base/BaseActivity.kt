@@ -1,5 +1,6 @@
 package com.sample.qr.presentation.ui.screens.base
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -52,6 +53,7 @@ abstract class BaseActivity : MvpAppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         provideComponent(presentationComponent)
         super.onCreate(savedInstanceState)
+        Log.d(TAG, "$this-task($taskId)")
         Log.d(TAG, "$this-onCreate($savedInstanceState)")
         init(savedInstanceState)
     }
@@ -73,6 +75,11 @@ abstract class BaseActivity : MvpAppCompatActivity() {
     override fun onStart() {
         super.onStart()
         Log.d(TAG, "$this-onStart()")
+    }
+
+    override fun onNewIntent(intent: Intent?) {
+        super.onNewIntent(intent)
+        Log.d(TAG, "$this-onNewIntent($intent)")
     }
 
     override fun onStop() {

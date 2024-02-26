@@ -1,18 +1,16 @@
 package com.sample.qr.presentation.ui.screens.common
 
+import android.annotation.SuppressLint
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import com.sample.qr.presentation.R
-import com.sample.qr.presentation.extensions.back
+import com.sample.qr.presentation.databinding.FragmentHtmlViewerBinding
 import com.sample.qr.presentation.ui.screens.base.BaseFragment
 import com.sample.qr.presentation.ui.views.binders.ToolbarTextBinder
-import kotlinx.android.synthetic.main.fragment_html_viewer.*
 
-internal class HtmlViewerFragment : BaseFragment() {
+internal class HtmlViewerFragment : BaseFragment<FragmentHtmlViewerBinding>() {
 
     companion object {
 
@@ -34,16 +32,18 @@ internal class HtmlViewerFragment : BaseFragment() {
         }
     }
 
-    private lateinit var mToolbarBinder: ToolbarTextBinder
+    private var toolbarBinder: ToolbarTextBinder? = null
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        super.onCreateView(inflater, container, savedInstanceState)
-        return inflater.inflate(R.layout.fragment_html_viewer, container, false)
-    }
+    override val layoutId: Int = R.layout.fragment_html_viewer
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         init(savedInstanceState)
+    }
+
+    override fun onDestroyView() {
+        toolbarBinder = null
+        super.onDestroyView()
     }
 
     private fun init(savedInstanceState: Bundle?) {
@@ -52,29 +52,32 @@ internal class HtmlViewerFragment : BaseFragment() {
     }
 
     private fun initViews() {
-        mToolbarBinder = ToolbarTextBinder(toolbar).apply {
+        val bind = viewBind ?: return
+
+        toolbarBinder = ToolbarTextBinder(bind.toolbar).apply {
             setBackButtonVisibility(true)
             setTitle(R.string.registration_title)
             setTitleSize(R.dimen.fonts_size_xlarge)
             setTitleBold(true)
             setOnBackClickListener {
-//                mRouter.exit()
-                requireFragmentManager().back()
+                router.exit()
+//                parentFragmentManager.back()
             }
         }
     }
 
+    @SuppressLint("SetJavaScriptEnabled")
     private fun initArgs() {
         arguments?.let { args ->
-            webView.apply {
+            viewBind?.webView?.apply {
                 webViewClient = WebClient()
                 settings.javaScriptEnabled = true
                 settings.loadWithOverviewMode = true
                 settings.useWideViewPort = true
             }
             when {
-                args.containsKey(TAG_CONTENT) -> webView.loadDataWithBaseURL("", args.getString(TAG_CONTENT) ?: "", "text/html", "UTF-8", "")
-                args.containsKey(TAG_URL) -> webView.loadUrl(args.getString(TAG_URL) ?: "")
+                args.containsKey(TAG_CONTENT) -> viewBind?.webView?.loadDataWithBaseURL("", args.getString(TAG_CONTENT) ?: "", "text/html", "UTF-8", "")
+                args.containsKey(TAG_URL) -> viewBind?.webView?.loadUrl(args.getString(TAG_URL) ?: "")
                 else -> throw IllegalArgumentException("$TAG must contain argument!")
             }
         } ?: throw IllegalArgumentException("$TAG must contain argument!")
@@ -82,6 +85,7 @@ internal class HtmlViewerFragment : BaseFragment() {
 }
 
 private class WebClient : WebViewClient() {
+    @Deprecated("Deprecated in Java")
     override fun shouldOverrideUrlLoading(view: WebView, url: String): Boolean {
         return false
     }

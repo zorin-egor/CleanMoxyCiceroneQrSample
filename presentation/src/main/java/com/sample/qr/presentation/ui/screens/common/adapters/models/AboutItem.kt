@@ -2,7 +2,7 @@ package com.sample.qr.presentation.ui.screens.common.adapters.models
 
 import android.graphics.Bitmap
 
-abstract  class BaseAboutItem
+sealed class BaseAboutItem
 
 open class TextAboutItem(val text: String) : BaseAboutItem()
 

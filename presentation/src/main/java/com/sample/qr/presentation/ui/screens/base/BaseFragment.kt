@@ -6,36 +6,41 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
+import androidx.databinding.DataBindingUtil
+import androidx.databinding.ViewDataBinding
 import com.google.android.material.snackbar.Snackbar
 import com.sample.qr.presentation.R
 import com.sample.qr.presentation.di.PresentationComponent
 import com.sample.qr.presentation.di.PresentationProvider
 import com.sample.qr.presentation.extensions.getSnackBar
-import com.sample.qr.presentation.extensions.isResultsGranted
 import moxy.MvpAppCompatFragment
 import ru.terrakok.cicerone.Router
 import javax.inject.Inject
 
-abstract class BaseFragment : MvpAppCompatFragment(), BaseActivity.OnBackPressFragment,
+abstract class BaseFragment<T : ViewDataBinding> : MvpAppCompatFragment(), BaseActivity.OnBackPressFragment,
     BaseView {
 
     companion object {
         private val TAG = BaseFragment::class.java.simpleName
-        const val PERMISSION_CAMERA = 1
-        const val REQUEST_CAMERA = 1000
+        private const val UNDEFINED_VALUE = -1
     }
 
     @Inject
-    protected lateinit var mRouter: Router
+    protected lateinit var router: Router
 
-    private var mSnackBar: Snackbar? = null
+    protected open val layoutId: Int = UNDEFINED_VALUE
+
+    protected var viewBind: T? = null
+
+    private var snackBar: Snackbar? = null
 
     private val presentationComponent: PresentationComponent
         get() = (requireContext().applicationContext as? PresentationProvider)?.presentationComponent
                 ?: throw IllegalStateException("Application context must be implement ${PresentationProvider::class.simpleName}")
 
     protected open fun provideComponent(component: PresentationComponent) {
-        component.inject(this)
+        component.inject(this as BaseFragment<ViewDataBinding>)
     }
 
     override fun onAttach(context: Context) {
@@ -51,7 +56,19 @@ abstract class BaseFragment : MvpAppCompatFragment(), BaseActivity.OnBackPressFr
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         Log.d(TAG, "$this-onCreateView($savedInstanceState)")
-        return super.onCreateView(inflater, container, savedInstanceState)
+        return if (layoutId != UNDEFINED_VALUE) {
+            DataBindingUtil.inflate<T>(
+                inflater,
+                layoutId,
+                container,
+                false
+            ).also { bind ->
+                bind.lifecycleOwner = this
+                viewBind = bind
+            }.root
+        } else {
+            null
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -81,12 +98,14 @@ abstract class BaseFragment : MvpAppCompatFragment(), BaseActivity.OnBackPressFr
     }
 
     override fun onDestroyView() {
+        viewBind = null
+        snackBar?.dismiss()
+        snackBar = null
         super.onDestroyView()
         Log.d(TAG, "$this-onDestroyView()")
     }
 
     override fun onDestroy() {
-        mSnackBar = null
         Log.d(TAG, "$this-onDestroy(${requireActivity().isFinishing})")
         super.onDestroy()
     }
@@ -96,32 +115,24 @@ abstract class BaseFragment : MvpAppCompatFragment(), BaseActivity.OnBackPressFr
         return false
     }
 
-    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        Log.d(TAG, "$this-onRequestPermissionsResult($requestCode, $permissions, $grantResults)")
-        when (requestCode) {
-            PERMISSION_CAMERA -> {
-                onCameraPermission(isResultsGranted(permissions, grantResults))
-            }
-        }
-    }
-
     override fun onMessage(value: String) {
         showSnackBar(value)
     }
 
-    protected open fun onCameraPermission(isGranted: Boolean) {
-        // Stub
-    }
-
     private fun init(view: View, savedInstanceState: Bundle?) {
-        mSnackBar = view.getSnackBar(R.color.colorDark)
+        snackBar = view.getSnackBar(R.color.colorDark)
     }
 
-    protected fun showSnackBar(string: String): Snackbar {
-        return mSnackBar?.apply {
-            setText(string)
-            setAction(null, null)
+    protected fun showSnackBar(
+        text: String,
+        actionText: String? = null,
+        actionListener: View.OnClickListener? = null,
+        actionColor: Int = android.R.color.white
+    ): Snackbar {
+        return snackBar?.apply {
+            setText(text)
+            setActionTextColor(ContextCompat.getColor(requireContext(), actionColor))
+            setAction(actionText, actionListener)
             show()
         } ?: throw IllegalStateException("Snackbar must be set")
     }

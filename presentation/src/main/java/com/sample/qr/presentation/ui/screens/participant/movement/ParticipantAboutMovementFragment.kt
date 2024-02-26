@@ -21,7 +21,7 @@ class ParticipantAboutMovementFragment : AboutListFragment(), ParticipantAboutMo
     @Inject
     lateinit var presenterProvider: Provider<ParticipantAboutMovementPresenter>
 
-    private val mPresenter: ParticipantAboutMovementPresenter by moxyPresenter { presenterProvider.get() }
+    private val presenter: ParticipantAboutMovementPresenter by moxyPresenter { presenterProvider.get() }
 
     override fun provideComponent(component: PresentationComponent) {
         component.inject(this)
@@ -33,18 +33,19 @@ class ParticipantAboutMovementFragment : AboutListFragment(), ParticipantAboutMo
     }
 
     override fun onAddItems(items: List<BaseAboutItem>) {
-        mRecyclerAdapter.addItems(items)
+        recyclerAdapter?.addItems(items)
     }
 
     override fun onUpdateItem(item: BaseAboutItem) {
-        mRecyclerAdapter.updateItem(item)
+        recyclerAdapter?.updateItem(item)
     }
 
     private fun init(savedInstanceState: Bundle?) {
-        mCollapsingText.setTextColor(getColorStates(R.color.colorWhite))
-        mCollapsingLayout.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.colorBlack))
-        mCollapsingLayout.setContentScrimResource(R.color.colorBlack)
-        mCollapsingImage.setImageResource(R.drawable.image_appbar)
-        mCollapsingText.setText(R.string.participant_movement_about_toolbar_title)
+        val bind = viewBind ?: return
+        bind.aboutListContainerContent.aboutListCollapsingToolbarText.setTextColor(getColorStates(R.color.colorWhite))
+        bind.aboutListContainerContent.aboutListCollapsingToolbarLayout.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.colorBlack))
+        bind.aboutListContainerContent.aboutListCollapsingToolbarLayout.setContentScrimResource(R.color.colorBlack)
+        bind.aboutListContainerContent.aboutListCollapsingImage.setImageResource(R.drawable.image_appbar)
+        bind.aboutListContainerContent.aboutListCollapsingToolbarText.setText(R.string.participant_movement_about_toolbar_title)
     }
 }

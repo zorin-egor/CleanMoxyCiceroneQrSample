@@ -2,13 +2,20 @@ package com.sample.qr.data.services
 
 import android.app.Application
 import com.sample.qr.data.R
-import com.sample.qr.data.services.models.*
+import com.sample.qr.data.services.models.Captcha
+import com.sample.qr.data.services.models.Error
+import com.sample.qr.data.services.models.Event
+import com.sample.qr.data.services.models.EventDescription
+import com.sample.qr.data.services.models.QrValidate
+import com.sample.qr.data.services.models.Response
+import com.sample.qr.data.services.models.Success
+import com.sample.qr.data.services.models.Token
 import com.sample.qr.domain.exceptions.AuthException
 import com.sample.qr.domain.exceptions.ConnectionException
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.withContext
-import java.util.*
+import java.util.UUID
 import javax.inject.Inject
 import kotlin.random.Random
 
@@ -16,8 +23,8 @@ internal class ApiServiceImpl @Inject constructor(
     private val app: Application
 ): ApiService {
 
-    private var mCount: Int = 0
-    private var mCaptcha: Captcha? = null
+    private var count: Int = 0
+    private var captcha: Captcha? = null
 
     private suspend fun <T> handler(isErrors: Boolean = true, isDelay: Boolean = true, action: () -> T): Response<T> {
         return withContext(Dispatchers.IO) {
@@ -25,11 +32,11 @@ internal class ApiServiceImpl @Inject constructor(
                 if (isDelay) {
                     delay(2000)
                 }
-                ++mCount
+                ++count
                 when {
-                    isErrors && mCount % 3 == 0 -> throw AuthException("Auth error")
-                    isErrors && mCount % 7 == 0 -> throw ConnectionException("Connection error")
-                    isErrors && mCount % 11 == 0 -> throw Exception("Unexpected error $mCount")
+                    isErrors && count % 3 == 0 -> throw AuthException("Auth error")
+                    isErrors && count % 7 == 0 -> throw ConnectionException("Connection error")
+                    isErrors && count % 11 == 0 -> throw Exception("Unexpected error $count")
                     else -> Success(action())
                 }
             } catch (e: Exception) {
@@ -39,7 +46,7 @@ internal class ApiServiceImpl @Inject constructor(
     }
 
     override suspend fun register(name: String, surname: String, mail: String, captcha: String): Response<Token> {
-        return if (captcha != mCaptcha?.captcha) {
+        return if (captcha != this.captcha?.captcha) {
             Error("Wrong captcha")
         } else {
             handler {
@@ -51,7 +58,7 @@ internal class ApiServiceImpl @Inject constructor(
     override suspend fun getCaptcha(): Response<Captcha> {
         return handler {
             Captcha(UUID.randomUUID().toString().substring(0, 5)).also {
-                mCaptcha = it
+                captcha = it
             }
         }
     }

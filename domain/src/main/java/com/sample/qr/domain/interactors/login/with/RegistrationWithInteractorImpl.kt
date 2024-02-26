@@ -1,22 +1,18 @@
 package com.sample.qr.domain.interactors.login.with
 
-import com.sample.qr.domain.repositories.PreferenceRepository
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
+import com.sample.qr.domain.usecases.agreement.GetAgreementUseCase
+import com.sample.qr.domain.usecases.agreement.SetAgreementUseCase
 
-class RegistrationWithInteractorImpl(
-    private val repository: PreferenceRepository
+internal class RegistrationWithInteractorImpl(
+    private val agreementSetUseCase: SetAgreementUseCase,
+    private val agreementGetUseCase: GetAgreementUseCase
 ) : RegistrationWithInteractor {
 
     override suspend fun setAgreement(value: Boolean) {
-        withContext(Dispatchers.IO) {
-            repository.setAgreement(value)
-        }
+        agreementSetUseCase(value)
     }
 
     override suspend fun getAgreement(): Boolean {
-        return withContext(Dispatchers.IO) {
-            repository.isAgreement()
-        }
+        return agreementGetUseCase()
     }
 }

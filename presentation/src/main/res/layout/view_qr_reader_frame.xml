@@ -1,18 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/qrReaderLayout"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    app:cardElevation="0dp"
-    app:cardCornerRadius="@dimen/corners_radius_small">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <FrameLayout
-        android:id="@+id/qrReaderContainer"
+    <androidx.cardview.widget.CardView
+        android:id="@+id/qrReaderLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        />
+        app:cardElevation="0dp"
+        app:cardCornerRadius="@dimen/corners_radius_small">
 
-</androidx.cardview.widget.CardView>
+        <FrameLayout
+            android:id="@+id/qrReaderContainer"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            />
 
+    </androidx.cardview.widget.CardView>
+
+</layout>

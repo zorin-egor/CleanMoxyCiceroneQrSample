@@ -7,15 +7,16 @@ import com.sample.qr.domain.models.Empty
 import com.sample.qr.domain.models.Error
 import com.sample.qr.domain.models.Success
 import com.sample.qr.presentation.R
-import com.sample.qr.presentation.extensions.startClearActivity
 import com.sample.qr.presentation.extensions.toBitmap
+import com.sample.qr.presentation.navigation.ActivitiesScreen
 import com.sample.qr.presentation.ui.screens.base.BasePresenter
-import com.sample.qr.presentation.ui.screens.participant.ParticipantActivity
-import kotlinx.coroutines.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import moxy.InjectViewState
 import moxy.presenterScope
 import ru.terrakok.cicerone.Router
-import java.util.*
 import javax.inject.Inject
 
 @InjectViewState
@@ -25,8 +26,8 @@ class RegistrationEmailPresenter @Inject constructor(
         private val interactor: RegistrationEmailInteractor
 ) : BasePresenter<RegistrationEmailView>(app, router) {
 
-    private var mCaptchaJob: Job? = null
-    private var mRegistrationJob: Job? = null
+    private var captchaJob: Job? = null
+    private var registrationJob: Job? = null
 
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
@@ -34,10 +35,11 @@ class RegistrationEmailPresenter @Inject constructor(
     }
 
     fun registration(name: String, surname: String, mail: String, captcha: String) {
-        if (mRegistrationJob?.isActive == true) {
+        if (registrationJob?.isActive == true) {
             return
         }
-        mRegistrationJob = presenterScope.launch {
+
+        registrationJob = presenterScope.launch {
 
             var isDataComplete = true
 
@@ -72,9 +74,10 @@ class RegistrationEmailPresenter @Inject constructor(
                 when (it) {
                     is Error -> handlerError(it)
                     is Success -> {
-//                        router.newRootScreen(ActivitiesScreen.ParticipantScreen())
-                        app.startClearActivity<ParticipantActivity>()
+                        router.newRootScreen(ActivitiesScreen.ParticipantScreen())
+//                        app.startClearActivity<ParticipantActivity>()
                     }
+                    else -> {}
                 }
             }
 
@@ -87,10 +90,11 @@ class RegistrationEmailPresenter @Inject constructor(
     }
 
     fun captcha() {
-        if (mCaptchaJob?.isActive == true) {
+        if (captchaJob?.isActive == true) {
             return
         }
-        mCaptchaJob = presenterScope.launch {
+
+        captchaJob = presenterScope.launch {
             viewState.onCaptchaProgress(true)
             viewState.onCaptchaBitmap()
 

@@ -1,15 +1,15 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 
 android {
-    compileSdkVersion SDK_MAX
-    buildToolsVersion BUILD_TOOL
+    namespace = "com.sample.qr.presentation"
 
     defaultConfig {
         minSdkVersion SDK_MIN
         targetSdkVersion SDK_MAX
+        compileSdk SDK_MAX
+        buildToolsVersion = BUILD_TOOL
         versionCode 1
         versionName "1.0"
 
@@ -34,17 +34,21 @@ android {
     }
 
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
     }
 
     kotlinOptions {
-        jvmTarget = '1.8'
+        jvmTarget = JavaVersion.VERSION_17.toString()
     }
+
+    buildFeatures {
+        dataBinding = true
+    }
+
 }
 
 dependencies {
-    implementation project(":data")
     implementation project(":domain")
 
     implementation "com.google.android.material:material:$XMATERIAL"
@@ -73,7 +77,7 @@ dependencies {
 
     implementation "com.google.zxing:core:$ZXING_CORE"
 
-    testImplementation 'junit:junit:4.+'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+    testImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
 }

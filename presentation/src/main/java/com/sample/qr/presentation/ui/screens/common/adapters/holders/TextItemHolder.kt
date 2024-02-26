@@ -9,15 +9,14 @@ import androidx.recyclerview.widget.RecyclerView
 import com.sample.qr.presentation.R
 import com.sample.qr.presentation.ui.screens.common.adapters.models.HeaderAboutItem
 import com.sample.qr.presentation.ui.screens.common.adapters.models.TextAboutItem
-import kotlinx.android.synthetic.main.view_about_list_item_text.view.*
 
 internal class TextItemHolder(val view: View) : RecyclerView.ViewHolder(view) {
 
     val layout: ConstraintLayout
-        get() = view.aboutListItemTextLayout
+        get() = view.findViewById(R.id.aboutListItemTextLayout)
 
     val text: AppCompatTextView
-        get() = view.aboutListItemText
+        get() = view.findViewById(R.id.aboutListItemText)
 
     fun bind(item: TextAboutItem) {
         text.text = item.text

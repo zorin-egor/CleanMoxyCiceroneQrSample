@@ -11,13 +11,13 @@ import ru.terrakok.cicerone.android.support.SupportAppScreen
 internal class ActivitiesScreen {
 
     class SplashScreen : SupportAppScreen() {
-        override fun getActivityIntent(context: Context?): Intent {
+        override fun getActivityIntent(context: Context): Intent {
             return Intent(context, SplashActivity::class.java)
         }
     }
 
     class RegistrationScreen : SupportAppScreen() {
-        override fun getActivityIntent(context: Context?): Intent {
+        override fun getActivityIntent(context: Context): Intent {
             return Intent(context, RegistrationActivity::class.java).apply {
                 addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
                 addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
@@ -26,7 +26,7 @@ internal class ActivitiesScreen {
     }
 
     class ParticipantScreen : SupportAppScreen() {
-        override fun getActivityIntent(context: Context?): Intent {
+        override fun getActivityIntent(context: Context): Intent {
             return Intent(context, ParticipantActivity::class.java).apply {
                 addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
                 addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
@@ -35,7 +35,7 @@ internal class ActivitiesScreen {
     }
 
     class VolunteerScreen : SupportAppScreen() {
-        override fun getActivityIntent(context: Context?): Intent {
+        override fun getActivityIntent(context: Context): Intent {
             return Intent(context, VolunteerActivity::class.java).apply {
                 addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
                 addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)

@@ -20,7 +20,7 @@ class ParticipantAboutFestivalFragment : AboutListFragment(), ParticipantAboutFe
     @Inject
     lateinit var presenterProvider: Provider<ParticipantAboutFestivalPresenter>
 
-    private val mPresenter: ParticipantAboutFestivalPresenter by moxyPresenter { presenterProvider.get() }
+    private val presenter: ParticipantAboutFestivalPresenter by moxyPresenter { presenterProvider.get() }
 
     override fun provideComponent(component: PresentationComponent) {
         component.inject(this)
@@ -32,18 +32,19 @@ class ParticipantAboutFestivalFragment : AboutListFragment(), ParticipantAboutFe
     }
 
     override fun onAddItems(items: List<BaseAboutItem>) {
-        mRecyclerAdapter.addItems(items)
+        recyclerAdapter?.addItems(items)
     }
 
     override fun onUpdateItem(item: BaseAboutItem) {
-        mRecyclerAdapter.updateItem(item)
+        recyclerAdapter?.updateItem(item)
     }
 
     private fun init(savedInstanceState: Bundle?) {
-        mCollapsingText.setTextColor(getColorStates(R.color.colorDark))
-        mCollapsingLayout.setBackgroundResource(R.color.colorBlack)
-        mCollapsingLayout.setContentScrimResource(R.color.colorAppYellow)
-        mCollapsingImage.setImageResource(R.drawable.image_appbar)
-        mCollapsingText.setText(R.string.participant_festival_about_toolbar_title)
+        val bind = viewBind ?: return
+        bind.aboutListContainerContent.aboutListCollapsingToolbarText.setTextColor(getColorStates(R.color.colorDark))
+        bind.aboutListContainerContent.aboutListCollapsingToolbarLayout.setBackgroundResource(R.color.colorBlack)
+        bind.aboutListContainerContent.aboutListCollapsingToolbarLayout.setContentScrimResource(R.color.colorAppYellow)
+        bind.aboutListContainerContent.aboutListCollapsingImage.setImageResource(R.drawable.image_appbar)
+        bind.aboutListContainerContent.aboutListCollapsingToolbarText.setText(R.string.participant_festival_about_toolbar_title)
     }
 }

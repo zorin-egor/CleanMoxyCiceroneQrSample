@@ -31,15 +31,12 @@ class SplashPresenter @Inject constructor(
 
             when {
                 isAuthenticated && isParticipantLogin -> {
-//                    router.newRootScreen(ActivitiesScreen.ParticipantScreen())
                     app.startClearActivity<ParticipantActivity>()
                 }
                 isAuthenticated && !isParticipantLogin -> {
-//                    router.newRootScreen(ActivitiesScreen.VolunteerScreen())
                     app.startClearActivity<VolunteerActivity>()
                 }
                 else -> {
-//                    router.newRootScreen(ActivitiesScreen.RegistrationScreen())
                     app.startClearActivity<RegistrationActivity>()
                 }
             }

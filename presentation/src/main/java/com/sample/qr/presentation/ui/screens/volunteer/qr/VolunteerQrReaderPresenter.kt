@@ -8,9 +8,8 @@ import com.sample.qr.domain.models.Error
 import com.sample.qr.domain.models.Success
 import com.sample.qr.presentation.R
 import com.sample.qr.presentation.extensions.openUrl
-import com.sample.qr.presentation.extensions.startClearActivity
+import com.sample.qr.presentation.navigation.ActivitiesScreen
 import com.sample.qr.presentation.ui.screens.base.BasePresenter
-import com.sample.qr.presentation.ui.screens.login.RegistrationActivity
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -26,9 +25,9 @@ class VolunteerQrReaderPresenter @Inject constructor(
         private val interactor: VolunteerInteractor
 ): BasePresenter<VolunteerQrReaderView>(app, router) {
 
-    private var mResetJob: Job? = null
-    private var mLogoutJob: Job? = null
-    private var mQrJob: Job? = null
+    private var resetJob: Job? = null
+    private var logoutJob: Job? = null
+    private var qrJob: Job? = null
 
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
@@ -36,8 +35,8 @@ class VolunteerQrReaderPresenter @Inject constructor(
     }
 
     private fun resetTimer() {
-        mResetJob?.cancel()
-        mResetJob = presenterScope.launch {
+        resetJob?.cancel()
+        resetJob = presenterScope.launch {
             delay(2000)
             viewState.onScannerState()
             viewState.onProgressBarVisibility(false)
@@ -45,8 +44,8 @@ class VolunteerQrReaderPresenter @Inject constructor(
     }
 
     fun setQrCode(code: Barcode) {
-        mQrJob?.cancel()
-        mQrJob = presenterScope.launch {
+        qrJob?.cancel()
+        qrJob = presenterScope.launch {
 
             viewState.onProgressBarVisibility(true)
 
@@ -79,13 +78,13 @@ class VolunteerQrReaderPresenter @Inject constructor(
     }
 
     fun logout() {
-        if (mLogoutJob?.isActive == true) {
+        if (logoutJob?.isActive == true) {
             return
         }
-        mLogoutJob = presenterScope.launch {
+        logoutJob = presenterScope.launch {
             interactor.logout()
-//            router.newRootScreen(ActivitiesScreen.RegistrationScreen())
-            app.startClearActivity<RegistrationActivity>()
+            router.newRootScreen(ActivitiesScreen.RegistrationScreen())
+//            app.startClearActivity<RegistrationActivity>()
         }
     }
 

@@ -1,22 +1,18 @@
 package com.sample.qr.domain.interactors.splash
 
-import com.sample.qr.domain.repositories.PreferenceRepository
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
+import com.sample.qr.domain.usecases.login.CheckAuthUseCase
+import com.sample.qr.domain.usecases.participant.CheckLoginParticipantUseCase
 
-class SplashInteractorImpl(
-    private val repository: PreferenceRepository
+internal class SplashInteractorImpl(
+    private val checkAuthUseCase: CheckAuthUseCase,
+    private val isParticipantUseCase: CheckLoginParticipantUseCase
 ) : SplashInteractor {
 
     override suspend fun isAuthenticated(): Boolean {
-        return withContext(Dispatchers.IO) {
-            repository.getToken() != null
-        }
+        return checkAuthUseCase()
     }
 
     override suspend fun isParticipantLogin(): Boolean {
-        return withContext(Dispatchers.IO) {
-            repository.isParticipantLogin()
-        }
+        return isParticipantUseCase()
     }
 }

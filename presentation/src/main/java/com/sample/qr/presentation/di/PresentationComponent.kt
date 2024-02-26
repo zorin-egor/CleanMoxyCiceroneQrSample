@@ -1,8 +1,7 @@
 package com.sample.qr.presentation.di
 
 import android.app.Application
-import com.sample.qr.data.di.DataComponent
-import com.sample.qr.presentation.di.modules.InteractorsModule
+import com.sample.qr.domain.di.DomainComponent
 import com.sample.qr.presentation.di.modules.NavigationModule
 import dagger.BindsInstance
 import dagger.Component
@@ -11,11 +10,10 @@ import dagger.Component
 @PresentationScope
 @Component(
     dependencies = [
-        DataComponent::class
+        DomainComponent::class
     ],
     modules = [
-        NavigationModule::class,
-        InteractorsModule::class
+        NavigationModule::class
     ]
 )
 interface PresentationComponent : Injects {
@@ -26,7 +24,7 @@ interface PresentationComponent : Injects {
         @BindsInstance
         fun with(app: Application): Builder
 
-        fun with(component: DataComponent): Builder
+        fun with(component: DomainComponent): Builder
 
         fun build(): PresentationComponent
     }

@@ -30,7 +30,7 @@ class ParticipantAboutFestivalPresenter @Inject constructor(
 ) : BasePresenter<ParticipantAboutFestivalView>(app, router) {
 
     @Volatile
-    private var mBitmap: Bitmap? = null
+    private var bitmap: Bitmap? = null
 
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
@@ -41,8 +41,8 @@ class ParticipantAboutFestivalPresenter @Inject constructor(
         presenterScope.launch {
 
             val bitmapDeferred = async(Dispatchers.IO) {
-                mBitmap ?: BitmapFactory.decodeResource(app.resources, R.drawable.image_background).let { bitmap ->
-                    bitmap.scale(0.5f).also { mBitmap = it }
+                bitmap ?: BitmapFactory.decodeResource(app.resources, R.drawable.image_background).let { bitmap ->
+                    bitmap.scale(0.5f).also { this@ParticipantAboutFestivalPresenter.bitmap = it }
                 }
             }
 
@@ -58,7 +58,7 @@ class ParticipantAboutFestivalPresenter @Inject constructor(
 
                         it.value.descriptions.forEach { item ->
                             item.imageUrl?.let { items.add(ImageAboutItem(bitmapDeferred.await()))}
-                            item.description?.let { items.add(TextAboutItem(it))}
+                            item.description.let { items.add(TextAboutItem(it))}
                         }
 
                         viewState.onAddItems(items)

@@ -7,9 +7,8 @@ import com.sample.qr.domain.models.Empty
 import com.sample.qr.domain.models.Error
 import com.sample.qr.domain.models.Success
 import com.sample.qr.presentation.R
-import com.sample.qr.presentation.extensions.startClearActivity
+import com.sample.qr.presentation.navigation.ActivitiesScreen
 import com.sample.qr.presentation.ui.screens.base.BasePresenter
-import com.sample.qr.presentation.ui.screens.volunteer.VolunteerActivity
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import moxy.InjectViewState
@@ -24,13 +23,13 @@ class VolunteerLoginPresenter @Inject constructor(
         private val interactor: VolunteerInteractor
 ) : BasePresenter<VolunteerLoginView>(app, router) {
 
-    private var mLoginJob: Job? = null
+    private var loginJob: Job? = null
 
     fun login(login: String, pwd: String) {
-        if (mLoginJob?.isActive == true) {
+        if (loginJob?.isActive == true) {
             return
         }
-        mLoginJob = presenterScope.launch {
+        loginJob = presenterScope.launch {
 
             var isDataComplete = true
 
@@ -56,8 +55,8 @@ class VolunteerLoginPresenter @Inject constructor(
                     is Error -> handlerError(it)
                     is Empty -> handlerError()
                     is Success -> {
-//                        router.newRootScreen(ActivitiesScreen.VolunteerScreen())
-                        app.startClearActivity<VolunteerActivity>()
+                        router.newRootScreen(ActivitiesScreen.VolunteerScreen())
+//                        app.startClearActivity<VolunteerActivity>()
                     }
                 }
             }

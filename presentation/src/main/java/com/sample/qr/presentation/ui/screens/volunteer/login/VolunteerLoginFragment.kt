@@ -5,25 +5,21 @@ import android.os.Bundle
 import android.text.InputFilter
 import android.text.Spanned
 import android.view.KeyEvent
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.TextView
 import com.sample.qr.presentation.R
+import com.sample.qr.presentation.databinding.FragmentVolunteerLoginBinding
 import com.sample.qr.presentation.di.PresentationComponent
-import com.sample.qr.presentation.extensions.back
 import com.sample.qr.presentation.extensions.getColorStates
-import com.sample.qr.presentation.extensions.show
+import com.sample.qr.presentation.navigation.FragmentsScreen
 import com.sample.qr.presentation.ui.screens.base.BaseFragment
-import com.sample.qr.presentation.ui.screens.common.HtmlViewerFragment
 import com.sample.qr.presentation.ui.views.binders.ImageButtonBinder
 import com.sample.qr.presentation.ui.views.binders.ToolbarTextBinder
-import kotlinx.android.synthetic.main.fragment_volunteer_login.*
 import moxy.ktx.moxyPresenter
 import javax.inject.Inject
 import javax.inject.Provider
 
-class VolunteerLoginFragment : BaseFragment(),
+class VolunteerLoginFragment : BaseFragment<FragmentVolunteerLoginBinding>(),
         VolunteerLoginView,
         View.OnClickListener,
         TextView.OnEditorActionListener {
@@ -42,19 +38,16 @@ class VolunteerLoginFragment : BaseFragment(),
     @Inject
     lateinit var presenterProvider: Provider<VolunteerLoginPresenter>
 
-    private val mPresenter: VolunteerLoginPresenter by moxyPresenter { presenterProvider.get() }
+    private val presenter: VolunteerLoginPresenter by moxyPresenter { presenterProvider.get() }
 
-    private lateinit var mToolbarBinder: ToolbarTextBinder
-    private lateinit var mAgreementButtonBinder: ImageButtonBinder
-    private lateinit var mRegistrationButtonBinder: ImageButtonBinder
+    private lateinit var toolbarBinder: ToolbarTextBinder
+    private lateinit var agreementButtonBinder: ImageButtonBinder
+    private lateinit var registrationButtonBinder: ImageButtonBinder
+
+    override val layoutId: Int = R.layout.fragment_volunteer_login
 
     override fun provideComponent(component: PresentationComponent) {
         component.inject(this)
-    }
-
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        super.onCreateView(inflater, container, savedInstanceState)
-        return inflater.inflate(R.layout.fragment_volunteer_login, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -65,14 +58,14 @@ class VolunteerLoginFragment : BaseFragment(),
     override fun onClick(v: View) {
         when(v.id) {
             R.id.volunteerLoginAgreementButton -> {
-//                mRouter.navigateTo(FragmentsScreen.AgreementScreen(""))
-                requireFragmentManager().show(HtmlViewerFragment.newUrlInstance(""), R.id.frameContainer)
+                router.navigateTo(FragmentsScreen.AgreementScreen(""))
+//                parentFragmentManager.show(HtmlViewerFragment.newUrlInstance(""), R.id.frameContainer)
             }
 
             R.id.volunteerLoginRegButton -> {
-                mPresenter.login(
-                    volunteerLoginEmailEdit.text.toString(),
-                    volunteerLoginPasswordEdit.text.toString()
+                presenter.login(
+                    viewBind?.volunteerLoginEmailEdit?.text.toString(),
+                    viewBind?.volunteerLoginPasswordEdit?.text.toString()
                 )
             }
         }
@@ -81,7 +74,7 @@ class VolunteerLoginFragment : BaseFragment(),
     override fun onEditorAction(view: TextView, p1: Int, p2: KeyEvent?): Boolean {
         when(view.id) {
             R.id.volunteerLoginPasswordEdit -> {
-                volunteerLoginRegButton.callOnClick()
+                viewBind?.volunteerLoginRegButton?.root?.performClick()
                 return true
             }
         }
@@ -90,19 +83,19 @@ class VolunteerLoginFragment : BaseFragment(),
     }
 
     override fun onButtonEnabled(isEnable: Boolean) {
-        mRegistrationButtonBinder.setEnable(isEnable, true)
+        registrationButtonBinder.setEnable(isEnable, true)
     }
 
     override fun onLoginText(text: String) {
-        volunteerLoginEmailEdit.setText(text)
+        viewBind?.volunteerLoginEmailEdit?.setText(text)
     }
 
     override fun onLoginError() {
-        volunteerLoginEmailEdit.backgroundTintList = getErrorColorState()
+        viewBind?.volunteerLoginEmailEdit?.backgroundTintList = getErrorColorState()
     }
 
     override fun onPasswordError() {
-        volunteerLoginPasswordEdit.backgroundTintList = getErrorColorState()
+        viewBind?.volunteerLoginPasswordEdit?.backgroundTintList = getErrorColorState()
     }
 
     private fun init(savedInstanceState: Bundle?) {
@@ -110,23 +103,25 @@ class VolunteerLoginFragment : BaseFragment(),
     }
 
     private fun initViews() {
-        volunteerLoginEmailEdit.filters = arrayOf(EditFilter(volunteerLoginEmailEdit))
-        volunteerLoginPasswordEdit.filters = arrayOf(EditFilter(volunteerLoginPasswordEdit))
-        volunteerLoginPasswordEdit.setOnEditorActionListener(this)
+        val bind = viewBind ?: return
 
-        mToolbarBinder = ToolbarTextBinder(toolbar).apply {
+        bind.volunteerLoginEmailEdit.filters = arrayOf(EditFilter(bind.volunteerLoginEmailEdit))
+        bind.volunteerLoginPasswordEdit.filters = arrayOf(EditFilter(bind.volunteerLoginPasswordEdit))
+        bind.volunteerLoginPasswordEdit.setOnEditorActionListener(this)
+
+        toolbarBinder = ToolbarTextBinder(bind.toolbar).apply {
             setBackButtonVisibility(true)
             setSeparatorVisibility(false)
             setTitle(R.string.registration_volunteer_title)
             setTitleSize(R.dimen.fonts_size_xlarge)
             setTitleBold(true)
             setOnBackClickListener {
-//                mRouter.exit()
-                requireFragmentManager().back()
+                router.exit()
+//                parentFragmentManager.back()
             }
         }
 
-        mAgreementButtonBinder = ImageButtonBinder(volunteerLoginAgreementButton).apply {
+        agreementButtonBinder = ImageButtonBinder(bind.volunteerLoginAgreementButton.root).apply {
             setOnClickListener(this@VolunteerLoginFragment)
             setTitle(R.string.registration_agreement_button)
             setTitleBold(false)
@@ -136,7 +131,7 @@ class VolunteerLoginFragment : BaseFragment(),
             setBackgroundTransparent()
         }
 
-        mRegistrationButtonBinder = ImageButtonBinder(volunteerLoginRegButton).apply {
+        registrationButtonBinder = ImageButtonBinder(bind.volunteerLoginRegButton.root).apply {
             setOnClickListener(this@VolunteerLoginFragment)
             setTitle(R.string.registration_sign_in)
             setTitleColor(R.color.colorWhite)

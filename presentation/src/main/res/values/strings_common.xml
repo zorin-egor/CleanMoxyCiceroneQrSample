@@ -8,6 +8,7 @@
 
     <string name="error_unknown">Unknown error</string>
     <string name="error_common">Error: %1$s</string>
+    <string name="error_permission_required">Permission required</string>
 
     <string name="url_qr">https://github.com/zorin-egor</string>
     <string name="url_license">https://help.github.com/en/github/creating-cloning-and-archiving-repositories/licensing-a-repository</string>

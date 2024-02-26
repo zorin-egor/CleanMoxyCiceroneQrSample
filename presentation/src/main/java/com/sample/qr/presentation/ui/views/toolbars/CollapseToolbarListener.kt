@@ -4,7 +4,7 @@ import com.google.android.material.appbar.AppBarLayout
 import kotlin.math.abs
 
 class CollapseToolbarListener(
-        private val mOnCollapseToolbarListener: OnCollapseToolbarListener?
+        private val onCollapseToolbarListener: OnCollapseToolbarListener?
 ) : AppBarLayout.OnOffsetChangedListener {
 
     interface OnCollapseToolbarListener {
@@ -19,27 +19,27 @@ class CollapseToolbarListener(
         IDLE
     }
 
-    private var mCurrentState: States = States.IDLE
+    private var currentState: States = States.IDLE
 
     override fun onOffsetChanged(appBarLayout: AppBarLayout, verticalOffset: Int) {
-        mOnCollapseToolbarListener?.let {
+        onCollapseToolbarListener?.let {
             when {
                 abs(verticalOffset) == appBarLayout.totalScrollRange -> {
-                    if (mCurrentState != States.COLLAPSED) {
+                    if (currentState != States.COLLAPSED) {
                         it.onToolbarCollapse()
-                        mCurrentState = States.COLLAPSED
+                        currentState = States.COLLAPSED
                     }
                 }
                 verticalOffset == 0 -> {
-                    if (mCurrentState != States.EXPANDED) {
+                    if (currentState != States.EXPANDED) {
                         it.onToolbarExpand()
-                        mCurrentState = States.EXPANDED
+                        currentState = States.EXPANDED
                     }
                 }
                 else -> {
-                    if (mCurrentState != States.IDLE) {
+                    if (currentState != States.IDLE) {
                         it.onToolbarChange(verticalOffset)
-                        mCurrentState = States.IDLE
+                        currentState = States.IDLE
                     }
                 }
             }

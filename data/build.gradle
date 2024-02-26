@@ -1,15 +1,15 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 
 android {
-    compileSdkVersion 30
-    buildToolsVersion "30.0.3"
+    namespace = "com.sample.qr.data"
 
     defaultConfig {
-        minSdkVersion 21
-        targetSdkVersion 30
+        minSdkVersion SDK_MIN
+        targetSdkVersion SDK_MAX
+        compileSdk SDK_MAX
+        buildToolsVersion = BUILD_TOOL
         versionCode 1
         versionName "1.0"
 
@@ -24,11 +24,11 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
     }
     kotlinOptions {
-        jvmTarget = '1.8'
+        jvmTarget = JavaVersion.VERSION_17.toString()
     }
 }
 
@@ -41,7 +41,7 @@ dependencies {
     implementation "com.google.dagger:dagger:$DAGGER"
     kapt "com.google.dagger:dagger-compiler:$DAGGER"
 
-    testImplementation 'junit:junit:4.+'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+    testImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
 }

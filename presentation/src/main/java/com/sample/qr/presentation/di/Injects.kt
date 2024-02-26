@@ -1,5 +1,6 @@
 package com.sample.qr.presentation.di
 
+import androidx.databinding.ViewDataBinding
 import com.sample.qr.presentation.ui.screens.base.BaseActivity
 import com.sample.qr.presentation.ui.screens.base.BaseFragment
 import com.sample.qr.presentation.ui.screens.login.email.RegistrationEmailFragment
@@ -16,7 +17,7 @@ interface Injects {
 
     fun inject(activity: BaseActivity)
 
-    fun inject(activity: BaseFragment)
+    fun inject(activity: BaseFragment<ViewDataBinding>)
 
     fun inject(fragment: SplashFragment)
 

@@ -20,7 +20,6 @@ import com.sample.qr.presentation.extensions.getColorStates
 import com.sample.qr.presentation.extensions.getColors
 import com.sample.qr.presentation.extensions.setFilter
 import com.sample.qr.presentation.extensions.toSpanned
-import kotlinx.android.synthetic.main.view_button_image_round.view.*
 
 class ImageButtonBinder(private val view: View) {
 
@@ -28,16 +27,16 @@ class ImageButtonBinder(private val view: View) {
         get() = view as ConstraintLayout
 
     val title: AppCompatTextView
-        get() = view.imageButtonTitle
+        get() = view.findViewById(R.id.imageButtonTitle)
 
     val container: FrameLayout
-        get() = view.iconContainer
+        get() = view.findViewById(R.id.iconContainer)
 
     val icon: AppCompatImageView
-        get() = view.imageButtonIcon
+        get() = view.findViewById(R.id.imageButtonIcon)
 
     val progress: ProgressBar
-        get() = view.progressBarIcon
+        get() = view.findViewById(R.id.progressBarIcon)
 
     var padding: Int = view.resources.getDimensionPixelOffset(R.dimen.default_small)
     var layoutColorDisableTint: Int = R.color.colorGrey

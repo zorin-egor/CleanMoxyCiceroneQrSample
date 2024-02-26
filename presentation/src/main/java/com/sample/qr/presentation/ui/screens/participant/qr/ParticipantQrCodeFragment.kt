@@ -2,25 +2,24 @@ package com.sample.qr.presentation.ui.screens.participant.qr
 
 import android.graphics.Bitmap
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.ViewCompat
+import androidx.activity.OnBackPressedCallback
 import androidx.core.view.updatePadding
 import com.sample.qr.presentation.R
+import com.sample.qr.presentation.databinding.FragmentParticipantQrCodeBinding
 import com.sample.qr.presentation.di.PresentationComponent
-import com.sample.qr.presentation.extensions.*
+import com.sample.qr.presentation.extensions.getBottom
+import com.sample.qr.presentation.extensions.getColorStates
+import com.sample.qr.presentation.extensions.getTop
+import com.sample.qr.presentation.navigation.FragmentsScreen
 import com.sample.qr.presentation.ui.screens.base.BaseFragment
-import com.sample.qr.presentation.ui.screens.participant.festival.ParticipantAboutFestivalFragment
-import com.sample.qr.presentation.ui.screens.participant.movement.ParticipantAboutMovementFragment
 import com.sample.qr.presentation.ui.views.binders.ImageButtonBinder
-import kotlinx.android.synthetic.main.fragment_participant_qr_code.*
-import kotlinx.android.synthetic.main.view_festival_header.*
 import moxy.ktx.moxyPresenter
 import javax.inject.Inject
 import javax.inject.Provider
 
-class ParticipantQrCodeFragment : BaseFragment(), ParticipantQrCodeView, View.OnClickListener {
+class ParticipantQrCodeFragment : BaseFragment<FragmentParticipantQrCodeBinding>(), ParticipantQrCodeView, View.OnClickListener {
 
     companion object {
         fun newInstance(): ParticipantQrCodeFragment = ParticipantQrCodeFragment()
@@ -29,65 +28,68 @@ class ParticipantQrCodeFragment : BaseFragment(), ParticipantQrCodeView, View.On
     @Inject
     lateinit var presenterProvider: Provider<ParticipantQrCodePresenter>
 
-    private val mPresenter: ParticipantQrCodePresenter by moxyPresenter { presenterProvider.get() }
+    private val presenter: ParticipantQrCodePresenter by moxyPresenter { presenterProvider.get() }
 
-    private lateinit var mExitButtonBinder: ImageButtonBinder
-    private lateinit var mFestivalButtonBinder: ImageButtonBinder
-    private lateinit var mMovementButtonBinder: ImageButtonBinder
+    private var exitButtonBinder: ImageButtonBinder? = null
+    private var festivalButtonBinder: ImageButtonBinder? = null
+    private var movementButtonBinder: ImageButtonBinder? = null
+
+    override val layoutId: Int = R.layout.fragment_participant_qr_code
 
     override fun provideComponent(component: PresentationComponent) {
         component.inject(this)
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        super.onCreateView(inflater, container, savedInstanceState)
-        return inflater.inflate(R.layout.fragment_participant_qr_code, container, false)
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         init(savedInstanceState)
-        ViewCompat.requestApplyInsets(view)
+    }
+
+    override fun onDestroyView() {
+        exitButtonBinder = null
+        festivalButtonBinder = null
+        movementButtonBinder = null
+        super.onDestroyView()
     }
 
     override fun onClick(v: View) {
         when(v.id) {
             R.id.participantQrCodeFestivalButton -> {
-//                mRouter.navigateTo(FragmentsScreen.ParticipantAboutFestivalScreen())
-                requireFragmentManager().show(ParticipantAboutFestivalFragment.newInstance(), R.id.frameContainer)
+                router.navigateTo(FragmentsScreen.ParticipantAboutFestivalScreen())
+//                parentFragmentManager.show(ParticipantAboutFestivalFragment.newInstance(), R.id.frameContainer)
             }
 
             R.id.participantQrCodeMovementButton -> {
-//                mRouter.navigateTo(FragmentsScreen.ParticipantAboutMovementScreen())
-                requireFragmentManager().show(ParticipantAboutMovementFragment.newInstance(), R.id.frameContainer)
+                router.navigateTo(FragmentsScreen.ParticipantAboutMovementScreen())
+//                parentFragmentManager.show(ParticipantAboutMovementFragment.newInstance(), R.id.frameContainer)
             }
 
             R.id.participantQrCodeImageView -> {
-                mPresenter.getQr()
+                presenter.getQr()
             }
 
             R.id.participantQrLogout -> {
-                mPresenter.logout()
+                presenter.logout()
             }
         }
     }
 
     override fun onProgressVisibility(isVisible: Boolean) {
-        participantQrCodeImageProgress.visibility = if (isVisible) View.VISIBLE else View.GONE
+        viewBind?.participantQrCodeImageProgress?.visibility = if (isVisible) View.VISIBLE else View.GONE
     }
 
     override fun onQrCodeReady(bitmap: Bitmap) {
-        participantQrCodeImageView.setImageBitmap(bitmap)
+        viewBind?.participantQrCodeImageView?.setImageBitmap(bitmap)
     }
 
     override fun onParticipantName(name: String) {
-        participantQrCodeName.text = name
+        viewBind?.participantQrCodeName?.text = name
     }
 
     private fun init(savedInstanceState: Bundle?) {
-        participantQrCodeContainer.setOnApplyWindowInsetsListener { view, insets ->
-            participantQrCodeHeaderLayout.updatePadding(top = insets.getTop())
-            (participantQrCodeMovementButton.layoutParams as? ViewGroup.MarginLayoutParams)?.apply {
+        viewBind?.participantQrCodeContainer?.setOnApplyWindowInsetsListener { view, insets ->
+            viewBind?.participantQrCodeHeaderLayout?.root?.updatePadding(top = insets.getTop())
+            (viewBind?.participantQrCodeMovementButton?.root?.layoutParams as? ViewGroup.MarginLayoutParams)?.apply {
                 setMargins(leftMargin, topMargin, rightMargin,
                         insets.getBottom() + resources.getDimensionPixelSize(R.dimen.default_large))
 
@@ -98,13 +100,21 @@ class ParticipantQrCodeFragment : BaseFragment(), ParticipantQrCodeView, View.On
     }
 
     private fun initViews() {
-        festivalHeaderTitle.setTextColor(getColorStates(R.color.colorLightYellow))
-        festivalHeaderDate.setTextColor(getColorStates(R.color.colorLightYellow))
-        participantQrCodeName.setTextColor(getColorStates(R.color.colorLightYellow))
-        participantQrCodeTitle.setTextColor(getColorStates(R.color.colorLightYellow))
-        participantQrCodeImageView.setOnClickListener(this)
+        val bind = viewBind ?: return
 
-        mExitButtonBinder = ImageButtonBinder(participantQrLogout).apply {
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                // Stub
+            }
+        })
+
+        bind.participantQrCodeHeaderLayout.festivalHeaderTitle.setTextColor(getColorStates(R.color.colorLightYellow))
+        bind.participantQrCodeHeaderLayout.festivalHeaderDate.setTextColor(getColorStates(R.color.colorLightYellow))
+        bind.participantQrCodeName.setTextColor(getColorStates(R.color.colorLightYellow))
+        bind.participantQrCodeTitle.setTextColor(getColorStates(R.color.colorLightYellow))
+        bind.participantQrCodeImageView.setOnClickListener(this)
+
+        exitButtonBinder = ImageButtonBinder(bind.participantQrLogout.root).apply {
             setOnClickListener(this@ParticipantQrCodeFragment)
             setTitle(R.string.volunteer_qr_reader_exit)
             setTitleColor(R.color.colorGreyTint)
@@ -115,7 +125,7 @@ class ParticipantQrCodeFragment : BaseFragment(), ParticipantQrCodeView, View.On
             setRippleColor(R.color.colorGreyRipple)
         }
 
-        mFestivalButtonBinder = ImageButtonBinder(participantQrCodeFestivalButton).apply {
+        festivalButtonBinder = ImageButtonBinder(bind.participantQrCodeFestivalButton.root).apply {
             setOnClickListener(this@ParticipantQrCodeFragment)
             setTitle(R.string.participant_qr_code_about_event)
             setTitleColor(R.color.colorLightYellow)
@@ -128,7 +138,7 @@ class ParticipantQrCodeFragment : BaseFragment(), ParticipantQrCodeView, View.On
             setRippleColor(R.color.colorYellowRipple)
         }
 
-        mMovementButtonBinder = ImageButtonBinder(participantQrCodeMovementButton).apply {
+        movementButtonBinder = ImageButtonBinder(bind.participantQrCodeMovementButton.root).apply {
             setOnClickListener(this@ParticipantQrCodeFragment)
             setTitle(R.string.participant_qr_code_about_movement)
             setTitleColor(R.color.colorLightYellow)

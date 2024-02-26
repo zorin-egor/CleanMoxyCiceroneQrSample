@@ -2,7 +2,6 @@ package com.sample.qr.data.di
 
 import android.app.Application
 import com.sample.qr.data.di.modules.repositroies.RepositoriesModule
-import com.sample.qr.data.di.modules.repositroies.RepositoriesProvider
 import com.sample.qr.data.di.modules.services.ServicesModule
 import dagger.BindsInstance
 import dagger.Component

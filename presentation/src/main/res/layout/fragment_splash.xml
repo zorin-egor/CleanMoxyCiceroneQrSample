@@ -1,29 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/splashLayout"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/splashBackgroundImageView"
+    <FrameLayout
+        android:id="@+id/splashLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scaleType="centerCrop"
-        android:layout_gravity="center"
-        android:src="@drawable/image_splash"
-        />
+        android:layout_height="match_parent">
 
-    <androidx.appcompat.widget.AppCompatTextView
-        style="@style/MediumTextView"
-        android:id="@+id/splashEventTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textStyle="bold"
-        android:textSize="@dimen/fonts_size_xlarge"
-        android:text="@string/registration_frame_title"
-        android:layout_gravity="center"
-        android:textAllCaps="true"
-        android:textColor="@color/colorLightYellow"
-        />
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/splashBackgroundImageView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:layout_gravity="center"
+            android:src="@drawable/image_splash"
+            />
 
-</FrameLayout>
+        <androidx.appcompat.widget.AppCompatTextView
+            style="@style/MediumTextView"
+            android:id="@+id/splashEventTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:textSize="@dimen/fonts_size_xlarge"
+            android:text="@string/registration_frame_title"
+            android:layout_gravity="center"
+            android:textAllCaps="true"
+            android:textColor="@color/colorLightYellow"
+            />
+
+    </FrameLayout>
+
+</layout>

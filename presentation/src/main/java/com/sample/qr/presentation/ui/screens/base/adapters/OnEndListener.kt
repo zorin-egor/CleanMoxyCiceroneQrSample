@@ -9,7 +9,7 @@ internal abstract class OnEndListener : RecyclerView.OnScrollListener() {
         private const val VISIBLE_THRESHOLD = 5
     }
 
-    private var mIsDown = false
+    private var isDown = false
 
     override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
         super.onScrollStateChanged(recyclerView, newState)
@@ -18,8 +18,8 @@ internal abstract class OnEndListener : RecyclerView.OnScrollListener() {
                val visibleItemCount = manager.childCount
                val totalItemCount = manager.itemCount
                val firstVisibleItemPosition = manager.findFirstVisibleItemPosition()
-               if (mIsDown && visibleItemCount + firstVisibleItemPosition >= totalItemCount - VISIBLE_THRESHOLD) {
-                   mIsDown = false
+               if (isDown && visibleItemCount + firstVisibleItemPosition >= totalItemCount - VISIBLE_THRESHOLD) {
+                   isDown = false
                    onListEnd()
                }
            }
@@ -28,7 +28,7 @@ internal abstract class OnEndListener : RecyclerView.OnScrollListener() {
 
     override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
         super.onScrolled(recyclerView, dx, dy)
-        mIsDown = dy > 0
+        isDown = dy > 0
     }
 
     abstract fun onListEnd()

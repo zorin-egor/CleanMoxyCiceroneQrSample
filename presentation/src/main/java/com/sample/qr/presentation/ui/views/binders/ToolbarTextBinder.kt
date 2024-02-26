@@ -11,8 +11,8 @@ import androidx.appcompat.widget.AppCompatImageButton
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.isVisible
+import com.sample.qr.presentation.R
 import com.sample.qr.presentation.extensions.getColorStates
-import kotlinx.android.synthetic.main.view_toolbar_text.view.*
 
 class ToolbarTextBinder(private val view: View) {
 
@@ -20,13 +20,13 @@ class ToolbarTextBinder(private val view: View) {
         get() = view as ConstraintLayout
 
     val back: AppCompatImageButton
-        get() = view.toolbarTextBackButton
+        get() = view.findViewById(R.id.toolbarTextBackButton)
 
     val title: AppCompatTextView
-        get() = view.toolbarTextHeaderTitle
+        get() = view.findViewById(R.id.toolbarTextHeaderTitle)
 
     val separator: View
-        get() = view.toolbarTextSeparator
+        get() = view.findViewById(R.id.toolbarTextSeparator)
 
     init {
         layout.setBackgroundResource(android.R.color.white)

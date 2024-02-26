@@ -4,8 +4,8 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import androidx.activity.OnBackPressedCallback
 import androidx.annotation.StringRes
-import androidx.fragment.app.Fragment
 import com.google.android.material.snackbar.Snackbar
 import com.sample.qr.presentation.R
 import com.sample.qr.presentation.di.PresentationComponent
@@ -29,19 +29,20 @@ abstract class BaseActivity : MvpAppCompatActivity() {
     }
 
     @Inject
-    protected lateinit var mRouter: Router
+    protected lateinit var router: Router
 
     @Inject
-    protected lateinit var mNavigatorHolder: NavigatorHolder
+    protected lateinit var navigatorHolder: NavigatorHolder
 
-    private var mSnackBar: Snackbar? = null
-    private val mNavigator: Navigator
+    private var snackBar: Snackbar? = null
+    private val navigator: Navigator
+
     private val presentationComponent: PresentationComponent
         get() = (applicationContext as? PresentationProvider)?.presentationComponent
                 ?: throw IllegalStateException("Application context must be implement ${PresentationProvider::class.simpleName}")
 
     init {
-        mNavigator = SupportAppNavigator(this, getNavigationId())
+        navigator = SupportAppNavigator(this, getNavigationId())
     }
 
     protected open fun getNavigationId(): Int = -1
@@ -89,50 +90,30 @@ abstract class BaseActivity : MvpAppCompatActivity() {
 
     override fun onDestroy() {
         Log.d(TAG, "$this-onDestroy($isFinishing)")
-        mSnackBar = null
+        snackBar = null
         super.onDestroy()
-    }
-
-    override fun onBackPressed() {
-        Log.d(TAG, "$this-onBackPressed()")
-        if (!isFragmentBackPress()) {
-//            mRouter.exit()
-            super.onBackPressed()
-        }
-    }
-
-    protected fun isFragmentBackPress(): Boolean {
-        supportFragmentManager.fragments.asReversed().forEach { parentFragment ->
-            if (isFragmentBackPress(parentFragment)) {
-                return true
-            }
-        }
-        return false
-    }
-
-    protected fun isFragmentBackPress(fragment: Fragment): Boolean {
-        fragment.childFragmentManager.fragments.asReversed().forEach { childFragment ->
-            if (isFragmentBackPress(childFragment)) {
-                return true
-            }
-        }
-        return fragment is OnBackPressFragment && fragment.onBackPressed()
     }
 
     override fun onResume() {
         super.onResume()
         Log.d(TAG, "$this-onResume()")
-        mNavigatorHolder.setNavigator(mNavigator)
+        navigatorHolder.setNavigator(navigator)
     }
 
     override fun onPause() {
         Log.d(TAG, "$this-onPause()")
-        mNavigatorHolder.removeNavigator()
+        navigatorHolder.removeNavigator()
         super.onPause()
     }
 
     private fun init(savedInstanceState: Bundle?) {
-        mSnackBar = findViewById<View>(android.R.id.content).getSnackBar(R.color.colorDarkGreyTint)
+        snackBar = findViewById<View>(android.R.id.content).getSnackBar(R.color.colorDarkGreyTint)
+
+        onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                router.exit()
+            }
+        })
     }
 
     protected fun showSnackBar(@StringRes resource: Int): Snackbar {
@@ -140,7 +121,7 @@ abstract class BaseActivity : MvpAppCompatActivity() {
     }
 
     protected fun showSnackBar(string: String): Snackbar {
-        return mSnackBar?.apply {
+        return snackBar?.apply {
             setText(string)
             setAction(null, null)
             show()

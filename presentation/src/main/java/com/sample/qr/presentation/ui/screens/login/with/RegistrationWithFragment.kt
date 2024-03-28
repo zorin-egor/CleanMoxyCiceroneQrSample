@@ -52,6 +52,7 @@ class RegistrationWithFragment : BaseFragment<FragmentRegistrationWithBinding>()
         when(v.id) {
             R.id.registrationWithEmailButton -> {
                 router.navigateTo(FragmentsScreen.RegistrationEmailScreen())
+//                parentFragmentManager.show(RegistrationEmailFragment.newInstance(), R.id.frameContainer, false)
             }
 
             R.id.registrationWithAgreementCheck -> {

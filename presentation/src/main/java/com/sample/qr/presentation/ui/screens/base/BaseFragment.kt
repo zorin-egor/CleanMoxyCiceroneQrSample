@@ -26,6 +26,8 @@ abstract class BaseFragment<T : ViewDataBinding> : MvpAppCompatFragment(), BaseA
         private const val UNDEFINED_VALUE = -1
     }
 
+    private val tag = javaClass.simpleName
+    
     @Inject
     protected lateinit var router: Router
 
@@ -45,17 +47,17 @@ abstract class BaseFragment<T : ViewDataBinding> : MvpAppCompatFragment(), BaseA
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        Log.d(TAG, "$this-onAttach()")
+        Log.d(tag, "$this-onAttach()")
         provideComponent(presentationComponent)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        Log.d(TAG, "$this-onCreate($savedInstanceState)")
+        Log.d(tag, "$this-onCreate($savedInstanceState)")
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        Log.d(TAG, "$this-onCreateView($savedInstanceState)")
+        Log.d(tag, "$this-onCreateView($savedInstanceState)")
         return if (layoutId != UNDEFINED_VALUE) {
             DataBindingUtil.inflate<T>(
                 inflater,
@@ -73,28 +75,28 @@ abstract class BaseFragment<T : ViewDataBinding> : MvpAppCompatFragment(), BaseA
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        Log.d(TAG, "$this-onViewCreated($savedInstanceState)")
+        Log.d(tag, "$this-onViewCreated($savedInstanceState)")
         init(view, savedInstanceState)
     }
 
     override fun onStart() {
         super.onStart()
-        Log.d(TAG, "$this-onStart()")
+        Log.d(tag, "$this-onStart()")
     }
 
     override fun onResume() {
         super.onResume()
-        Log.d(TAG, "$this-onResume()")
+        Log.d(tag, "$this-onResume()")
     }
 
     override fun onPause() {
         super.onPause()
-        Log.d(TAG, "$this-onPause()")
+        Log.d(tag, "$this-onPause()")
     }
 
     override fun onStop() {
         super.onStop()
-        Log.d(TAG, "$this-onStop()")
+        Log.d(tag, "$this-onStop()")
     }
 
     override fun onDestroyView() {
@@ -102,16 +104,16 @@ abstract class BaseFragment<T : ViewDataBinding> : MvpAppCompatFragment(), BaseA
         snackBar?.dismiss()
         snackBar = null
         super.onDestroyView()
-        Log.d(TAG, "$this-onDestroyView()")
+        Log.d(tag, "$this-onDestroyView()")
     }
 
     override fun onDestroy() {
-        Log.d(TAG, "$this-onDestroy(${requireActivity().isFinishing})")
+        Log.d(tag, "$this-onDestroy(${requireActivity().isFinishing})")
         super.onDestroy()
     }
 
     override fun onBackPressed(): Boolean {
-        Log.d(TAG, "$this-onBackPressed()")
+        Log.d(tag, "$this-onBackPressed()")
         return false
     }
 

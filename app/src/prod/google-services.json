@@ -1,13 +1,13 @@
 {
   "project_info": {
-    "project_number": "777023643145",
-    "project_id": "moxyciceroneqr",
-    "storage_bucket": "moxyciceroneqr.appspot.com"
+    "project_number": "",
+    "project_id": "",
+    "storage_bucket": ""
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:777023643145:android:45f985c0f50bdf409ba2d8",
+        "mobilesdk_app_id": "1:1:android:1",
         "android_client_info": {
           "package_name": "com.sample.qr_reader"
         }
@@ -36,7 +36,7 @@
     },
     {
       "client_info": {
-        "mobilesdk_app_id": "1:777023643145:android:3ba3a0a0c5df4d729ba2d8",
+        "mobilesdk_app_id": "1:1:android:1",
         "android_client_info": {
           "package_name": "com.sample.qr_reader.beta"
         }

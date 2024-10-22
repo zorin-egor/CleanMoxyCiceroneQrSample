@@ -2,22 +2,22 @@ package com.sample.qr.presentation.navigation
 
 import android.content.Context
 import android.content.Intent
+import com.github.terrakok.cicerone.androidx.ActivityScreen
 import com.sample.qr.presentation.ui.screens.login.RegistrationActivity
 import com.sample.qr.presentation.ui.screens.participant.ParticipantActivity
 import com.sample.qr.presentation.ui.screens.splash.SplashActivity
 import com.sample.qr.presentation.ui.screens.volunteer.VolunteerActivity
-import ru.terrakok.cicerone.android.support.SupportAppScreen
 
 internal class ActivitiesScreen {
 
-    class SplashScreen : SupportAppScreen() {
-        override fun getActivityIntent(context: Context): Intent {
+    class SplashScreen : ActivityScreen {
+        override fun createIntent(context: Context): Intent {
             return Intent(context, SplashActivity::class.java)
         }
     }
 
-    class RegistrationScreen : SupportAppScreen() {
-        override fun getActivityIntent(context: Context): Intent {
+    class RegistrationScreen : ActivityScreen {
+        override fun createIntent(context: Context): Intent {
             return Intent(context, RegistrationActivity::class.java).apply {
                 addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
                 addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
@@ -25,8 +25,8 @@ internal class ActivitiesScreen {
         }
     }
 
-    class ParticipantScreen : SupportAppScreen() {
-        override fun getActivityIntent(context: Context): Intent {
+    class ParticipantScreen : ActivityScreen {
+        override fun createIntent(context: Context): Intent {
             return Intent(context, ParticipantActivity::class.java).apply {
                 addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
                 addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
@@ -34,8 +34,8 @@ internal class ActivitiesScreen {
         }
     }
 
-    class VolunteerScreen : SupportAppScreen() {
-        override fun getActivityIntent(context: Context): Intent {
+    class VolunteerScreen : ActivityScreen {
+        override fun createIntent(context: Context): Intent {
             return Intent(context, VolunteerActivity::class.java).apply {
                 addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
                 addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)

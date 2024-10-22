@@ -2,10 +2,10 @@ package com.sample.qr.presentation.ui.screens.base
 
 import android.app.Application
 import androidx.annotation.StringRes
+import com.github.terrakok.cicerone.Router
 import com.sample.qr.domain.models.Error
 import com.sample.qr.presentation.R
 import moxy.MvpPresenter
-import ru.terrakok.cicerone.Router
 
 abstract class BasePresenter<View: BaseView>(
         protected val app: Application,

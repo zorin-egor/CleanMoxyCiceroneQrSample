@@ -6,8 +6,9 @@ import android.view.View
 import com.sample.qr.presentation.R
 import com.sample.qr.presentation.extensions.setStatusBarColorRes
 import com.sample.qr.presentation.extensions.setStatusBarLight
-import com.sample.qr.presentation.navigation.FragmentsScreen
+import com.sample.qr.presentation.extensions.show
 import com.sample.qr.presentation.ui.screens.base.BaseActivity
+import com.sample.qr.presentation.ui.screens.login.with.RegistrationWithFragment
 
 internal class RegistrationActivity : BaseActivity(), View.OnClickListener {
 
@@ -20,8 +21,8 @@ internal class RegistrationActivity : BaseActivity(), View.OnClickListener {
         setStatusBarLight(false)
 
         if (savedInstanceState == null) {
-            router.newRootScreen(FragmentsScreen.RegistrationWithScreen())
-//            supportFragmentManager.show(RegistrationWithFragment.newInstance(), R.id.frameContainer, false, null)
+//            router.newRootScreen(FragmentsScreen.RegistrationWithScreen())
+            supportFragmentManager.show(RegistrationWithFragment.newInstance(), R.id.frameContainer, false, null)
         }
     }
 

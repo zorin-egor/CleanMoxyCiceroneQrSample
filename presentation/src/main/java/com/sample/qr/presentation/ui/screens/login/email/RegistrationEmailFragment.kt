@@ -13,8 +13,9 @@ import com.sample.qr.presentation.databinding.FragmentRegistrationEmailBinding
 import com.sample.qr.presentation.di.PresentationComponent
 import com.sample.qr.presentation.extensions.back
 import com.sample.qr.presentation.extensions.getColorStates
-import com.sample.qr.presentation.navigation.FragmentsScreen
+import com.sample.qr.presentation.extensions.show
 import com.sample.qr.presentation.ui.screens.base.BaseFragment
+import com.sample.qr.presentation.ui.screens.common.HtmlViewerFragment
 import com.sample.qr.presentation.ui.views.binders.ImageButtonBinder
 import com.sample.qr.presentation.ui.views.binders.ToolbarTextBinder
 import moxy.ktx.moxyPresenter
@@ -67,8 +68,8 @@ class RegistrationEmailFragment : BaseFragment<FragmentRegistrationEmailBinding>
     override fun onClick(v: View) {
         when(v.id) {
             R.id.registrationEmailAgreementButton -> {
-                router.navigateTo(FragmentsScreen.AgreementScreen(getString(R.string.url_license)))
-//                parentFragmentManager.show(HtmlViewerFragment.newUrlInstance(getString(R.string.url_license)), R.id.frameContainer)
+//                router.navigateTo(FragmentsScreen.AgreementScreen(getString(R.string.url_license)))
+                parentFragmentManager.show(HtmlViewerFragment.newUrlInstance(getString(R.string.url_license)), R.id.frameContainer)
             }
             R.id.registrationEmailRegButton -> {
                 presenter.registration(

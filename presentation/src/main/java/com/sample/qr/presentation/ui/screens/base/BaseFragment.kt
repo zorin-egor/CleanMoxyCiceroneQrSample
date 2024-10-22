@@ -9,13 +9,13 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
+import com.github.terrakok.cicerone.Router
 import com.google.android.material.snackbar.Snackbar
 import com.sample.qr.presentation.R
 import com.sample.qr.presentation.di.PresentationComponent
 import com.sample.qr.presentation.di.PresentationProvider
 import com.sample.qr.presentation.extensions.getSnackBar
 import moxy.MvpAppCompatFragment
-import ru.terrakok.cicerone.Router
 import javax.inject.Inject
 
 abstract class BaseFragment<T : ViewDataBinding> : MvpAppCompatFragment(), BaseActivity.OnBackPressFragment,

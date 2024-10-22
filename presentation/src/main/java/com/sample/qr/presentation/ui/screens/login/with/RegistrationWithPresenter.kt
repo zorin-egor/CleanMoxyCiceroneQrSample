@@ -1,12 +1,12 @@
 package com.sample.qr.presentation.ui.screens.login.with
 
 import android.app.Application
+import com.github.terrakok.cicerone.Router
 import com.sample.qr.domain.interactors.login.with.RegistrationWithInteractor
 import com.sample.qr.presentation.ui.screens.base.BasePresenter
 import kotlinx.coroutines.launch
 import moxy.InjectViewState
 import moxy.presenterScope
-import ru.terrakok.cicerone.Router
 import javax.inject.Inject
 
 @InjectViewState

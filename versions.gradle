@@ -35,6 +35,6 @@ ext {
     GSON = '2.8.2'
     DAGGER = '2.50'
     GLIDE = '4.4.0'
-    CICERONE = '5.1.0'
+    CICERONE = '7.1'
     ZXING_CORE = '3.4.1'
 }

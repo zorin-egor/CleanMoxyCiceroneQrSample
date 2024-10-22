@@ -5,8 +5,10 @@ import android.view.View
 import com.sample.qr.presentation.R
 import com.sample.qr.presentation.databinding.FragmentRegistrationWithBinding
 import com.sample.qr.presentation.di.PresentationComponent
+import com.sample.qr.presentation.extensions.show
 import com.sample.qr.presentation.navigation.FragmentsScreen
 import com.sample.qr.presentation.ui.screens.base.BaseFragment
+import com.sample.qr.presentation.ui.screens.login.email.RegistrationEmailFragment
 import com.sample.qr.presentation.ui.views.binders.ImageButtonBinder
 import com.sample.qr.presentation.ui.views.binders.ToolbarTextBinder
 import moxy.ktx.moxyPresenter
@@ -51,8 +53,8 @@ class RegistrationWithFragment : BaseFragment<FragmentRegistrationWithBinding>()
     override fun onClick(v: View) {
         when(v.id) {
             R.id.registrationWithEmailButton -> {
-                router.navigateTo(FragmentsScreen.RegistrationEmailScreen())
-//                parentFragmentManager.show(RegistrationEmailFragment.newInstance(), R.id.frameContainer, false)
+//                router.navigateTo(FragmentsScreen.RegistrationEmailScreen())
+                parentFragmentManager.show(RegistrationEmailFragment.newInstance(), R.id.frameContainer)
             }
 
             R.id.registrationWithAgreementCheck -> {

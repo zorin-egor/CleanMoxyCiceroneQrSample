@@ -2,6 +2,7 @@ package com.sample.qr.presentation.ui.screens.login.email
 
 import android.app.Application
 import android.util.Patterns
+import com.github.terrakok.cicerone.Router
 import com.sample.qr.domain.interactors.login.email.RegistrationEmailInteractor
 import com.sample.qr.domain.models.Empty
 import com.sample.qr.domain.models.Error
@@ -16,7 +17,6 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import moxy.InjectViewState
 import moxy.presenterScope
-import ru.terrakok.cicerone.Router
 import javax.inject.Inject
 
 @InjectViewState

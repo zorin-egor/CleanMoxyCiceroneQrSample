@@ -1,6 +1,7 @@
 package com.sample.qr.presentation.ui.screens.volunteer.qr
 
 import android.app.Application
+import com.github.terrakok.cicerone.Router
 import com.google.android.gms.vision.barcode.Barcode
 import com.sample.qr.domain.interactors.volunteer.VolunteerInteractor
 import com.sample.qr.domain.models.Empty
@@ -15,7 +16,6 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import moxy.InjectViewState
 import moxy.presenterScope
-import ru.terrakok.cicerone.Router
 import javax.inject.Inject
 
 @InjectViewState

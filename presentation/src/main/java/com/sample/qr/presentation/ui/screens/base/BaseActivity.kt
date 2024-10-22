@@ -6,16 +6,16 @@ import android.util.Log
 import android.view.View
 import androidx.activity.OnBackPressedCallback
 import androidx.annotation.StringRes
+import com.github.terrakok.cicerone.Navigator
+import com.github.terrakok.cicerone.NavigatorHolder
+import com.github.terrakok.cicerone.Router
+import com.github.terrakok.cicerone.androidx.AppNavigator
 import com.google.android.material.snackbar.Snackbar
 import com.sample.qr.presentation.R
 import com.sample.qr.presentation.di.PresentationComponent
 import com.sample.qr.presentation.di.PresentationProvider
 import com.sample.qr.presentation.extensions.getSnackBar
 import moxy.MvpAppCompatActivity
-import ru.terrakok.cicerone.Navigator
-import ru.terrakok.cicerone.NavigatorHolder
-import ru.terrakok.cicerone.Router
-import ru.terrakok.cicerone.android.support.SupportAppNavigator
 import javax.inject.Inject
 
 abstract class BaseActivity : MvpAppCompatActivity() {
@@ -42,7 +42,7 @@ abstract class BaseActivity : MvpAppCompatActivity() {
                 ?: throw IllegalStateException("Application context must be implement ${PresentationProvider::class.simpleName}")
 
     init {
-        navigator = SupportAppNavigator(this, getNavigationId())
+        navigator = AppNavigator(this, getNavigationId())
     }
 
     protected open fun getNavigationId(): Int = -1

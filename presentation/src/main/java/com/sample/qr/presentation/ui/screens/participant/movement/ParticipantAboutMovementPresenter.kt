@@ -3,6 +3,7 @@ package com.sample.qr.presentation.ui.screens.participant.movement
 import android.app.Application
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import com.github.terrakok.cicerone.Router
 import com.sample.qr.domain.interactors.participant.ParticipantInteractor
 import com.sample.qr.domain.models.Empty
 import com.sample.qr.domain.models.Error
@@ -19,7 +20,6 @@ import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import moxy.InjectViewState
 import moxy.presenterScope
-import ru.terrakok.cicerone.Router
 import javax.inject.Inject
 
 @InjectViewState

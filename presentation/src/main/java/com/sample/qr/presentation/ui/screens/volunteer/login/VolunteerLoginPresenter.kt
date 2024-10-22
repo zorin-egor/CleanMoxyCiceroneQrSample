@@ -2,6 +2,7 @@ package com.sample.qr.presentation.ui.screens.volunteer.login
 
 import android.app.Application
 import android.util.Patterns
+import com.github.terrakok.cicerone.Router
 import com.sample.qr.domain.interactors.volunteer.VolunteerInteractor
 import com.sample.qr.domain.models.Empty
 import com.sample.qr.domain.models.Error
@@ -13,7 +14,6 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import moxy.InjectViewState
 import moxy.presenterScope
-import ru.terrakok.cicerone.Router
 import javax.inject.Inject
 
 @InjectViewState

@@ -85,7 +85,7 @@ internal class HtmlViewerFragment : BaseFragment<FragmentHtmlViewerBinding>() {
 }
 
 private class WebClient : WebViewClient() {
-    @Deprecated("Deprecated in Java")
+    @Deprecated("Deprecated in Java", ReplaceWith("false"))
     override fun shouldOverrideUrlLoading(view: WebView, url: String): Boolean {
         return false
     }
